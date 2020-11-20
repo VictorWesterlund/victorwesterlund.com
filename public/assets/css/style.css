@@ -1,5 +1,7 @@
 :root {
-    --color: black;
+    --color: #212121;
+    --color-accent: white;
+    --color-highlight: #f4f2ff;
 }
 
 @font-face {
@@ -23,19 +25,25 @@
 /* Cornerstones */
 
 * {
-    margin: auto;
+    margin: 0;
     font-family: "Roboto Mono","Arial",sans-serif;
+    color: var(--color);
+}
+
+*::selection {
+    background: var(--color-highlight);
     color: var(--color);
 }
 
 html,
 body,
-main {
+main,
+main > div {
     width: 100%;
     height: 100%;
 }
 
-/* Components */
+/* --- */
 
 .logo {
     --size: 3vw;
@@ -58,16 +66,118 @@ main {
     opacity: .3;
 }
 
+h2 {
+    font-weight: normal;
+    font-size: 1.42em;
+}
+
+h2 span {
+    color: var(--color-accent);
+    background: var(--color);
+}
+
 /* Layout */
 
 main {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    margin: auto;
+    max-width: 200vh;
+    background: url("../img/pattern.gif");
+    background-size: auto 90%;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+}
+
+main * {
+    image-rendering: initial;
 }
 
 main > div {
-    width: 80%;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+/* --- */
+
+#intro {
+    left: 0;
+    width: 100vh;
+    box-sizing: border-box;
+    padding: 5vw;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+#intro .inner {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+#intro .logo {
+    --size: 7vh;
+    margin-bottom: 2em;
+}
+
+#intro .block {
+    width: 100%;
+    font-size: 3vh;
+}
+
+#intro .block:last-child {
+    display: flex;
+    align-items: flex-end;
+}
+
+#intro .block p {
+    font-size: .7em;
+    margin-bottom: 1.5em;
+}
+
+#intro .block p span {
+    background: var(--color-accent);
+}
+
+/* --- */
+
+nav a {
+    text-decoration: none;
+    margin-right: 2em;
+    font-size: .9em;
+}
+
+nav a::after {
+    content: "→";
+    padding-left: .5em;
+}
+
+nav a:hover {
+    background: var(--color-highlight);
+    font-weight: bold;
+}
+
+/* --- */
+
+#myface {
+    right: 0;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#myface picture,
+#myface img {
+    position: absolute;
+    height: 80%;
+    bottom: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+#myface img {
+    height: 100%;
 }
