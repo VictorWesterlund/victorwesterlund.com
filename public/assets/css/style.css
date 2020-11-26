@@ -66,6 +66,10 @@ main > div {
     opacity: .3;
 }
 
+h1 {
+    font-size: 2em;
+}
+
 h2 {
     font-weight: normal;
     font-size: 1.42em;
@@ -180,4 +184,41 @@ nav a:hover {
 
 #myface img {
     height: 100%;
+}
+
+@media screen and (max-width: 800px) {
+
+    h1 {
+        font-size: 7vw;
+    }
+
+    h2 {
+        font-size: 5vw;
+    }
+
+    main {
+        max-width: unset;
+        background-size: auto 100vw;
+    }
+
+    #intro {
+        width: initial;
+        padding: 10vw;
+        text-align: center;
+    }
+
+    #intro p {
+        text-align: justify;
+    }
+
+    #myface {
+        display: none;
+    }
+
+    nav a {
+        text-decoration: none;
+        margin-right: 5vw;
+        font-size: 5vw;
+    }
+
 }
