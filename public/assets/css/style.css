@@ -46,7 +46,7 @@ main > div {
 /* --- */
 
 .logo {
-    --size: 3vw;
+    --size: 5em;
     --skew: calc(var(--size) / 1.7);
 
     width: 0; 
@@ -186,6 +186,14 @@ nav a:hover {
     height: 100%;
 }
 
+@media screen and (max-width: 1010px) {
+
+    #myface {
+        display: none;
+    }
+
+}
+
 @media screen and (max-width: 800px) {
 
     h1 {
@@ -211,8 +219,8 @@ nav a:hover {
         text-align: justify;
     }
 
-    #myface {
-        display: none;
+    #intro .block p:last-of-type {
+        text-align: initial;
     }
 
     nav a {
@@ -222,3 +230,6 @@ nav a:hover {
     }
 
 }
+
+
+/* Victor Westerlund */
