@@ -1,0 +1,235 @@
+:root {
+    --color: #212121;
+    --color-accent: white;
+    --color-highlight: #f4f2ff;
+}
+
+@font-face {
+    font-family: "Roboto Mono";
+    font-weight: 400;
+    src: local("Roboto Mono Regular"),
+         local("RobotoMono-Regular"),
+         url("../fonts/RobotoMono-Regular.woff2"),
+         url("../fonts/RobotoMono-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Mono";
+    font-weight: 700;
+    src: local("Roboto Mono Bold"),
+         local("RobotoMono-Bold"),
+         url("../fonts/RobotoMono-Bold.woff2"),
+         url("../fonts/RobotoMono-Bold.ttf");
+}
+
+/* Cornerstones */
+
+* {
+    margin: 0;
+    font-family: "Roboto Mono","Arial",sans-serif;
+    color: var(--color);
+}
+
+*::selection {
+    background: var(--color-highlight);
+    color: var(--color);
+}
+
+html,
+body,
+main,
+main > div {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- */
+
+.logo {
+    --size: 5em;
+    --skew: calc(var(--size) / 1.7);
+
+    width: 0; 
+    height: 0; 
+    border-left: var(--skew) solid transparent;
+    border-right: var(--skew) solid transparent;
+    border-top: var(--size) solid var(--color);
+}
+
+.logo::after {
+    content: "";
+    width: 0; 
+    height: 0; 
+    border-left: var(--skew) solid transparent;
+    border-right: var(--skew) solid transparent;
+    border-top: var(--size) solid var(--color);
+    opacity: .3;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-weight: normal;
+    font-size: 1.42em;
+}
+
+h2 span {
+    color: var(--color-accent);
+    background: var(--color);
+}
+
+/* Layout */
+
+main {
+    margin: auto;
+    max-width: 200vh;
+    background: url("../img/pattern.gif");
+    background-size: auto 90%;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+}
+
+main * {
+    image-rendering: initial;
+}
+
+main > div {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+/* --- */
+
+#intro {
+    left: 0;
+    width: 100vh;
+    box-sizing: border-box;
+    padding: 5vw;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+#intro .inner {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+#intro .logo {
+    --size: 7vh;
+    margin-bottom: 2em;
+}
+
+#intro .block {
+    width: 100%;
+    font-size: 3vh;
+}
+
+#intro .block:last-child {
+    display: flex;
+    align-items: flex-end;
+}
+
+#intro .block p {
+    font-size: .7em;
+    margin-bottom: 1.5em;
+}
+
+#intro .block p span {
+    background: var(--color-accent);
+}
+
+/* --- */
+
+nav a {
+    text-decoration: none;
+    margin-right: 2em;
+    font-size: .9em;
+}
+
+nav a::after {
+    content: "→";
+    padding-left: .5em;
+}
+
+nav a:hover {
+    background: var(--color-highlight);
+    font-weight: bold;
+}
+
+/* --- */
+
+#myface {
+    right: 0;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#myface picture,
+#myface img {
+    position: absolute;
+    height: 80%;
+    bottom: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+#myface img {
+    height: 100%;
+}
+
+@media screen and (max-width: 1010px) {
+
+    #myface {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+
+    h1 {
+        font-size: 7vw;
+    }
+
+    h2 {
+        font-size: 5vw;
+    }
+
+    main {
+        max-width: unset;
+        background-size: auto 100vw;
+    }
+
+    #intro {
+        width: initial;
+        padding: 10vw;
+        text-align: center;
+    }
+
+    #intro p {
+        text-align: justify;
+    }
+
+    #intro .block p:last-of-type {
+        text-align: initial;
+    }
+
+    nav a {
+        text-decoration: none;
+        margin-right: 5vw;
+        font-size: 5vw;
+    }
+
+}
+
+
+/* Victor Westerlund */
