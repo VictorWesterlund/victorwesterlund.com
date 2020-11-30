@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Victor Westerlund</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Full-stack web developer from Stockholm, Sweden.">
+    <meta name="theme-color" content="#ffffff">
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <title>Victor Westerlund</title>
 </head>
 <body>
-	<p>Too Early.. but not 425!</p>
+    <main>
+        <div id="intro">
+            <div class="inner">
+                <div class="block">
+                    <div class="logo"></div>
+                    <h1><span>victor westerlund</span></h1>
+                    <h2><span>full-stack web developer</span></h2>
+                </div>
+                <div class="block">
+                    <p><span>I create things with code, and usually design things for humans to interact with my code. I'm also a true wannabe jack of all trades; and coffee-loving non-coffee snob.</span></p>
+                    <p><span><strong>hello@victorwesterlund.com</strong></span></p>
+                </div>
+                <div class="block">
+                    <nav>
+                        <!--<a href="#">contact</a>-->
+                        <a href="https://github.com/VictorWesterlund" target="_blank">github</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div id="myface">
+            <picture>
+                <source media="(min-width: 900px)" srcset="assets/img/myface/highres.webp" type="image/webp">
+                <source media="(min-width: 300px)" srcset="assets/img/myface/mediumres.webp" type="image/webp">
+                <source media="(min-width: 900px)" srcset="assets/img/myface/highres.png" type="image/png">
+                <source media="(min-width: 300px)" srcset="assets/img/myface/mediumres.png" type="image/png">
+                <img srcset="assets/img/myface/fallback.jpg" type="image/jpeg">
+            </picture>
+        </div>
+    </main>
+    <script src="assets/js/script.js" type="module"></script>
+    <script src="assets/js/legacy.js" nomodule></script>
 </body>
 </html>

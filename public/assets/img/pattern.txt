@@ -1,0 +1,29 @@
++--------------------------------------------------------------------------------------------+
+Size comparison for 6x6 monochrome image ranking from best to worst
+
+pattern.gif: 49 bytes
+	- Dithering level: 7 (doesn't really matter)
+	- Transparency threshold: 128 (doesn't really matter)
+
+pattern.bmp: 86 bytes
+	- Bit depth: 4
+	- Dirthering level: 7 (doesn't really matter)
+
+pattern.png: 151 bytes
+	- Bit depth: 4
+	- Dirthering level: 7 (doesn't really matter)
+	- Transparency threshold: 192 (doesn't really matter)
+	- Interlaced (saves 1 byte)
+
+pattern.webp: 248 bytes
+	- Quality: 100
+
+pattern.jpg: 800 bytes
+	- Chroma Subsampling: 4:2:2 (saves 6 bytes from 4:4:4)
++--------------------------------------------------------------------------------------------+
+
+-- Here's the image used for the test --
+data:image/gif;base64,R0lGODlhBgAGAHAAACwAAAAABgAGAIH////08v8AAAAAAAACCgRiGciL9mA6ExQAOw==
+
+
+Unfortunately after all response headers are set, the total ends up at 317 bytes.
