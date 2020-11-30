@@ -19,11 +19,11 @@
 		}
 
 		h1 {
-			font-size: 6em;
+			font-size: 8vh;
 		}
 
 		h2 {
-			font-size: 3em;
+			font-size: 4vh;
 		}
 
 		img {
@@ -33,6 +33,26 @@
 			left: 50%;
 			transform: translate(-50%);
 			pointer-events: none;
+		}
+		@media screen and (max-width: 800px) {
+
+			.logo {
+				--size: 15vw;
+				margin-bottom: 10vw;
+			}
+
+			#content {
+				padding: 10vw;
+			}
+
+			h1 {
+				font-size: 10vw;
+			}
+
+			h2 {
+				font-size: 5vw;
+			}
+
 		}
 	</style>
 </head>
