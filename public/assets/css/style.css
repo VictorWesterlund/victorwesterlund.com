@@ -143,6 +143,7 @@ main > div {
 
 #intro .block p span {
     background: var(--color-accent);
+    margin-right: .9em;
 }
 
 /* --- */
@@ -230,6 +231,4 @@ nav a:hover {
     }
 
 }
-
-
 /* Victor Westerlund */
