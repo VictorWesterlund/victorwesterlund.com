@@ -1,16 +1,18 @@
-const activeCaches = [
-	"content-v1"
-];
-
+const version = "12062129";
 const root = "/victorwesterlund.com/public/";
+
+let activeCaches = [
+	`content-${version}`
+];
 
 self.addEventListener("install", event => {
 	event.waitUntil(
-		caches.open("content-v1").then(cache => cache.addAll([
+		caches.open(`content-${version}`).then(cache => cache.addAll([
 			root,
 			root + "assets/css/style.css",
 			root + "assets/img/favicon.png",
 			root + "assets/js/script.js",
+			root + "assets/img/pattern.gif",
 			root + "assets/fonts/RobotoMono-Bold.woff2",
 			root + "assets/fonts/RobotoMono-Regular.woff2"
 		]))
@@ -32,15 +34,14 @@ self.addEventListener("activate", event => {
 	)
 });
 
-/* ---- */
-
-function handleRequest(event) {
+// Fetch and save content to bucket
+function fetchContent(event) {
 	const networkFetch = fetch(event.request);
 
 	event.waitUntil(
 		networkFetch.then(response => {
 			const responseClone = response.clone();
-			caches.open("downloaded").then(cache => cache.put(event.request, responseClone));
+			caches.open("bucket").then(cache => cache.put(event.request, responseClone));
 		})
 	);
 
@@ -50,16 +51,24 @@ function handleRequest(event) {
 self.addEventListener("fetch", event => {
 	const url = new URL(event.request.url);
 
-	console.log(url);
-	if(url.origin != location.origin) {
+	const origin = (url.origin == location.origin) ? true : false; // Is same-origin
+	
+	// Fetch cross-origin content
+	if(!origin) {
 		event.respondWith(fetch(url.href));
+		return;
 	}
 
-	// if(url.origin == location.origin && url.pathname == root) {
-	// 	event.respondWith(caches.match("index.html"));
-	// 	return;
-	// }
+	// Get pattern.gif from generator. Fall back to cache on failure
+	if(origin && url.pathname.endsWith("pattern.gif")) {
+		const pattern = new Request(`${location.origin}/${root}/assets/img/pattern.php`);
+		event.respondWith(fetch(pattern) || caches.match(event.request).then(response => response));
+		return;
+	}
 
-	event.respondWith(caches.match(url.pathname) || handleRequest(event));
+	// Respond with content for cache or fetch and save
+	event.respondWith(
+		caches.match(event.request).then(response => response || fetchContent(event))
+	);
 });
 // Victor Westerlund
