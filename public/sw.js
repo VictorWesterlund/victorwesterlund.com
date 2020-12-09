@@ -50,7 +50,6 @@ function fetchContent(event) {
 
 self.addEventListener("fetch", event => {
 	const url = new URL(event.request.url);
-
 	const origin = (url.origin == location.origin) ? true : false; // Is same-origin
 	
 	// Fetch cross-origin content
@@ -59,10 +58,10 @@ self.addEventListener("fetch", event => {
 		return;
 	}
 
-	// Get pattern.gif from generator. Fall back to cache on failure
+	// Get pattern.gif from generator. Fallback to cache on failure
 	if(origin && url.pathname.endsWith("pattern.gif")) {
-		const pattern = new Request(`${location.origin}/${root}/assets/img/pattern.php`);
-		event.respondWith(fetch(pattern) || caches.match(event.request).then(response => response));
+		const pattern = new Request(`${location.origin}/${root}assets/img/pattern.php`);
+		event.respondWith(fetch(pattern) || caches.match(url.pathname).then(response => response));
 		return;
 	}
 
