@@ -1,5 +1,5 @@
-const version = "12062129";
-const root = "/victorwesterlund.com/public/";
+const version = "12140809";
+const root = "/";
 
 let activeCaches = [
 	`content-${version}`
@@ -9,7 +9,6 @@ self.addEventListener("install", event => {
 	event.waitUntil(
 		caches.open(`content-${version}`).then(cache => cache.addAll([
 			root,
-			root + "offline.txt",
 			root + "assets/css/style.css",
 			root + "assets/img/favicon.png",
 			root + "assets/js/script.js",
