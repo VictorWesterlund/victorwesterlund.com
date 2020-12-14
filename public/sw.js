@@ -62,11 +62,7 @@ self.addEventListener("fetch", event => {
 	// Get pattern.gif from generator. Fallback to cache on failure
 	if(origin && url.pathname.endsWith("pattern.gif")) {
 		const pattern = new Request(`${location.origin}${root}assets/img/pattern.php`);
-		event.respondWith(
-			fetch(pattern).catch(() => {
-				return caches.match(root + "assets/img/pattern.gif");
-			})
-		);
+		event.respondWith(fetch(pattern).catch(() => caches.match(root + "assets/img/pattern.gif")));
 		return;
 	}
 
