@@ -64,7 +64,7 @@ self.addEventListener("fetch", event => {
 		const pattern = new Request(`${location.origin}${root}assets/img/pattern.php`);
 		event.respondWith(
 			fetch(pattern).catch(() => {
-				return caches.match(event.request);
+				return caches.match(root + "pattern.gif");
 			})
 		);
 		return;
