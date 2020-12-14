@@ -9,6 +9,7 @@ self.addEventListener("install", event => {
 	event.waitUntil(
 		caches.open(`content-${version}`).then(cache => cache.addAll([
 			root,
+			root + "offline.txt",
 			root + "assets/css/style.css",
 			root + "assets/img/favicon.png",
 			root + "assets/js/script.js",
@@ -35,7 +36,7 @@ self.addEventListener("activate", event => {
 });
 
 // Fetch and save content to bucket
-function fetchContent(event) {
+async function fetchContent(event) {
 	const networkFetch = fetch(event.request);
 
 	event.waitUntil(
@@ -45,7 +46,8 @@ function fetchContent(event) {
 		})
 	);
 
-	return caches.match(event.request).then(response => response || networkFetch);
+	const response = await caches.match(event.request);
+	return response || networkFetch;
 }
 
 self.addEventListener("fetch", event => {
@@ -61,7 +63,11 @@ self.addEventListener("fetch", event => {
 	// Get pattern.gif from generator. Fallback to cache on failure
 	if(origin && url.pathname.endsWith("pattern.gif")) {
 		const pattern = new Request(`${location.origin}/${root}assets/img/pattern.php`);
-		event.respondWith(fetch(pattern) || caches.match(url.pathname).then(response => response));
+		event.respondWith(
+			fetch(pattern).catch(() => {
+				return caches.match(event.request);
+			})
+		);
 		return;
 	}
 
