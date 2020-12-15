@@ -1,4 +1,4 @@
-const version = "12140858";
+const version = "12151420";
 const root = "/";
 
 let activeCaches = [
@@ -8,7 +8,7 @@ let activeCaches = [
 self.addEventListener("install", event => {
 	event.waitUntil(
 		caches.open(`content-${version}`).then(cache => cache.addAll([
-			root,
+			root + "index.html",
 			root + "assets/css/style.css",
 			root + "assets/img/favicon.png",
 			root + "assets/js/script.js",
@@ -34,8 +34,8 @@ self.addEventListener("activate", event => {
 	)
 });
 
-// Fetch and save content to bucket
-async function fetchContent(event) {
+// Fetch and cache content to bucket
+async function fetchToCache(event) {
 	const networkFetch = fetch(event.request);
 
 	event.waitUntil(
@@ -49,13 +49,35 @@ async function fetchContent(event) {
 	return response || networkFetch;
 }
 
+// Fetch and follow redirects without caching
+async function fetchContent(url,i = 0) {
+	console.log(i);
+	if(i >= 5) {
+		throw new Error("ERR_TOO_MANY_REDIRECTS");
+	}
+
+	return await fetch(url).then(response => {
+		if(response.redirected) {
+			i++;
+			return fetchContent(response.url,i);
+		}
+		return response;
+	});
+}
+
 self.addEventListener("fetch", event => {
 	const url = new URL(event.request.url);
 	const origin = (url.origin == location.origin) ? true : false; // Is same-origin
+
+	// Speed up TTFB by serving index file first
+	if(origin && url.pathname == "/") {
+		event.respondWith(caches.match(root + "index.html"));
+		return;
+	}
 	
-	// Fetch cross-origin content
-	if(!origin) {
-		event.respondWith(fetch(url.href));
+	// Fetch cross-origin none-asset content
+	if(!origin || (url.pathname.substring(1,7) != "assets")) {
+		event.respondWith(fetchContent(url.href));
 		return;
 	}
 
@@ -68,7 +90,7 @@ self.addEventListener("fetch", event => {
 
 	// Respond with content for cache or fetch and save
 	event.respondWith(
-		caches.match(event.request).then(response => response || fetchContent(event))
+		caches.match(event.request).then(response => response || fetchToCache(event))
 	);
 });
 // Victor Westerlund
