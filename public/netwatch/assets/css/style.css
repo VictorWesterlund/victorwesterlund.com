@@ -32,6 +32,7 @@ body {
 	justify-content: center;
 	-webkit-filter: saturate(2);
 	filter: saturate(2);
+	cursor: url("../img/cursor.png") 32 32, auto;
 }
 
 /* ---- */
