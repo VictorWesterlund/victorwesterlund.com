@@ -7,7 +7,7 @@
 :root {
 	--color-frame: #18635F;
 	--color-text: #d7fffa;
-	--color-text-distortion: #03554d;
+	--color-text-distortion: #03554d40;
 }
 
 ::selection {
@@ -81,9 +81,15 @@ body {
 
 #keystoneLogo {
 	width: 400px;
+	min-width: 400px;
 	height: 100%;
-	background: #0a4845a4;
+	background: #0a484541;
 	border-right: solid 2px var(--color-frame);
+}
+
+#keystoneLogo img:first-child {
+	height: 35px;
+	margin-right: 20px;
 }
 
 #keystoneLogo img {
@@ -195,7 +201,7 @@ main {
 	margin-bottom: 30px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
 	#urlbox > p {
 		display: none;
 	}
@@ -205,7 +211,7 @@ main {
 	}
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 950px) {
 	#keystoneLogo {
 		width: 100%;
 	}
