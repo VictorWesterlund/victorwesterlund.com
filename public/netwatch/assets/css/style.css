@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "NetWatch";
-	src: url("../fonts/netwatch-normal.woff2");
+	src: url("/netwatch/assets/fonts/netwatch-normal.woff2");
 	font-weight: 300;
 }
 
@@ -32,7 +32,7 @@ body {
 	justify-content: center;
 	-webkit-filter: saturate(2);
 	filter: saturate(2);
-	cursor: url("../img/cursor.png") 32 32, auto;
+	cursor: url("/netwatch/assets/img/cursor.png") 32 32, auto;
 }
 
 /* ---- */
