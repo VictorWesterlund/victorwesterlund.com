@@ -51,7 +51,6 @@ async function fetchToCache(event) {
 
 // Fetch and follow redirects without caching
 async function fetchContent(url,i = 0) {
-	console.log(i);
 	if(i >= 5) {
 		throw new Error("ERR_TOO_MANY_REDIRECTS");
 	}
