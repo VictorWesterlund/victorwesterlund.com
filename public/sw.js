@@ -1,4 +1,4 @@
-const version = "1611341781";
+const version = "1612093525";
 const root = "/";
 
 let activeCaches = [
@@ -11,7 +11,6 @@ self.addEventListener("install", event => {
 			root + "index.html",
 			root + "assets/css/style.css",
 			root + "assets/img/favicon.png",
-			root + "assets/js/script.js",
 			root + "assets/img/pattern.gif",
 			root + "assets/fonts/RobotoMono-Bold.woff2",
 			root + "assets/fonts/RobotoMono-Regular.woff2"
