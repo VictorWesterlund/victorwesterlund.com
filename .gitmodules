@@ -1,0 +1,3 @@
+[submodule "api/sources/stadia-avatar"]
+	path = api/sources/stadia-avatar
+	url = https://github.com/VictorWesterlund/stadia-avatar.git
