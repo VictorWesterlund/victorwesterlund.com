@@ -2,3 +2,4 @@
 
 api/endpoint/*
 !api/endpoint/status.php
+!api/endpoint/router.php
