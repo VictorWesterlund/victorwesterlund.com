@@ -1,4 +1,4 @@
 .well-known/
 
 api/endpoint/*
-!api/endpoint/ping.php
+!api/endpoint/status.php
