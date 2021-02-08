@@ -2,12 +2,13 @@
 
 	header("Content-Type: application/json");
 
-	$api = $_GET["api"];
+	$api = preg_replace("/[^a-z0-9]/i","-",$_GET["api"]); // Replace special chars
 
-	function response($online = false) {
-		$isError = $online ? true : false;
-		$message = $online ? "Online" : "Offline";
-		$color = $online ? "green" : "lightgrey";
+	// Return the API state
+	function online($online = false) {
+		$isError = $online === true ? true : false;
+		$message = $online === true ? "Online" : "Offline";
+		$color = $online === true ? "green" : "lightgrey";
 
 		$response = [
 			"schemaVersion" => 1,
@@ -20,13 +21,13 @@
 		echo json_encode($response);
 	}
 
-	function getStatus() {
-		if(!is_dir($api)) {
-			response(false);
+	function checkStatus($api) {
+		if(!file_exists($api)) {
+			online(false);
 			return false;
 		}
 		
-		response(true);
+		online(true);
 	}
 
-	getStatus();
+	checkStatus($api);
