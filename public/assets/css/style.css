@@ -83,12 +83,15 @@ h2 span {
 /* Layout */
 
 main {
+    --grid-spacing: 30px;
+
     margin: auto;
     max-width: 200vh;
-    background: url("../img/pattern.gif");
-    background-size: auto 90%;
+    background: radial-gradient(circle, rgba(0,0,0,.2) 1px, rgba(0,0,0,0) 1px), url("../img/pattern.gif");
+    background-size: var(--grid-spacing) var(--grid-spacing), auto 90%;
     background-position: 100% 100%;
-    background-repeat: no-repeat;
+    background-repeat: repeat,no-repeat;
+    background-blend-mode: multiply;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
 }

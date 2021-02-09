@@ -19,7 +19,8 @@
                     <h2><span>full-stack web developer</span></h2>
                 </div>
                 <div class="block">
-                    <p><span>I create things with code, and usually design things for humans to interact with my code. I'm also a true wannabe jack of all trades; and a coffee-loving non-coffee snob.</span></p>
+                    <p><span>I create things with code. The things I've created for the public reside as open-source repositories on <a href="https://github.com/VictorWesterlund" target="_blank">GitHub</a>, the rest you'll be lucky to hear about some day.</span></p>
+                    <p><span>Other topics (seemingly irrelevant to programming) I find facinating include but is in no way limited to astronomy, psychology, sociology, economics, ...</span></p>
                     <p><span><strong>hello@victorwesterlund.com</strong></span>&#8203;(<a href="https://storage.googleapis.com/public.victorwesterlund.com/publickey.gpg" target="_blank">PGP&nbsp;Key</a>)</p>
                 </div>
                 <div class="block">
@@ -41,20 +42,20 @@
         </div>
     </main>
     <script>
-        // Promote IE to Edge
-        if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
-            window.location = 'microsoft-edge:' + window.location;
-            setTimeout(function() {
-                window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
-            },1);
-        }
+    // Promote IE to Edge
+    if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+        window.location = 'microsoft-edge:' + window.location;
+        setTimeout(function() {
+            window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
+        },1);
+    }
 
-        // Register SW if supported by browser
-        if(navigator.serviceWorker) {
-            navigator.serviceWorker.register("sw.js",{
-                scope: "/"
-            });
-        }
+    // Register SW if supported by browser
+    if(navigator.serviceWorker) {
+        navigator.serviceWorker.register("sw.js",{
+            scope: "/"
+        });
+    }
     </script>
 </body>
 </html>
