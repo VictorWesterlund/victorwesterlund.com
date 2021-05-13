@@ -1,4 +1,4 @@
-const version = "1612853669";
+const version = "1620928311";
 const root = "/";
 
 let activeCaches = [
