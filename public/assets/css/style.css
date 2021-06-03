@@ -1,22 +1,28 @@
 @import url("fonts.css");
 
 :root {
-    --color: #212121;
-    --color-accent: white;
-    --color-highlight: #f4f2ff;
+    --comp-background: 255,255,255;
+    --comp-highlight: 244,242,255;
+    --comp-accent: 33,33,33;
+
+    --color-background: rgb(var(--comp-background));
+    --color-highlight: rgb(var(--comp-highlight));
+    --color-accent: rgb(var(--comp-accent));
+
+    --page-padding: 5vw;
 }
 
-/* Cornerstones */
+/* -- Cornerstones -- */
 
 * {
     margin: 0;
     font-family: "Roboto Mono","Arial",sans-serif;
-    color: var(--color);
+    color: var(--color-accent);
 }
 
 *::selection {
-    background: var(--color-highlight);
-    color: var(--color);
+    background-color: var(--color-highlight);
+    color: var(--color-accent);
 }
 
 html,
@@ -27,27 +33,22 @@ main > div {
     height: 100%;
 }
 
-/* --- */
+/* ---- */
 
 .logo {
     --size: 5em;
     --skew: calc(var(--size) / 1.7);
 
     width: 0; 
-    height: 0; 
-    border-left: var(--skew) solid transparent;
-    border-right: var(--skew) solid transparent;
-    border-top: var(--size) solid var(--color);
+    height: 0;
+    border: var(--skew) solid transparent;
+    border-top: var(--size) solid var(--color-accent);
 }
 
 .logo::after {
     content: "";
-    width: 0; 
-    height: 0; 
-    border-left: var(--skew) solid transparent;
-    border-right: var(--skew) solid transparent;
-    border-top: var(--size) solid var(--color);
-    opacity: .3;
+    border: var(--skew) solid transparent;
+    border-top: var(--size) solid rgba(var(--comp-accent),.3);
 }
 
 h1 {
@@ -60,19 +61,19 @@ h2 {
 }
 
 h2 span {
-    color: var(--color-accent);
-    background: var(--color);
+    color: var(--color-background);
+    background-color: var(--color-accent);
 }
 
-/* Layout */
+/* -- Layout -- */
 
 main {
-    --grid-spacing: 30px;
+    --grid-spacing: 3vh;
 
     margin: auto;
     max-width: 200vh;
-    background: radial-gradient(circle, rgba(0,0,0,.2) 1px, rgba(0,0,0,0) 1px), url("../img/pattern.gif");
-    background-size: var(--grid-spacing) var(--grid-spacing), auto 90%;
+    background: radial-gradient(circle, rgba(var(--comp-accent),.2) .1vh, var(--color-background) .1vh),url("../img/pattern.gif");
+    background-size: var(--grid-spacing) var(--grid-spacing),auto 90%;
     background-position: 100% 100%;
     background-repeat: repeat,no-repeat;
     background-blend-mode: multiply;
@@ -90,13 +91,13 @@ main > div {
     height: 100%;
 }
 
-/* --- */
+/* ---- */
 
 #intro {
     left: 0;
     width: 100vh;
     box-sizing: border-box;
-    padding: 5vw;
+    padding: var(--page-padding);
     display: flex;
     align-items: center;
     z-index: 1;
@@ -104,13 +105,14 @@ main > div {
 
 #intro .inner {
     display: flex;
-    flex-wrap: wrap;
     height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #intro .logo {
     --size: 7vh;
-    margin-bottom: 2em;
+    margin-bottom: calc(var(--page-padding) / 2);
 }
 
 #intro .block {
@@ -129,11 +131,11 @@ main > div {
 }
 
 #intro .block p span {
-    background: var(--color-accent);
     margin-right: .9em;
+    background-color: var(--color-background);
 }
 
-/* --- */
+/* ---- */
 
 nav a {
     text-decoration: none;
@@ -146,12 +148,7 @@ nav a::after {
     padding-left: .5em;
 }
 
-nav a:hover {
-    background: var(--color-highlight);
-    font-weight: bold;
-}
-
-/* --- */
+/* ---- */
 
 #myface {
     right: 0;
@@ -174,15 +171,12 @@ nav a:hover {
     height: 100%;
 }
 
-@media screen and (max-width: 1010px) {
+/* -- Size Queries -- */
 
-    #myface {
-        display: none;
+@media (max-width: 1100px) {
+    :root {
+        --page-padding: 50px;
     }
-
-}
-
-@media screen and (max-width: 800px) {
 
     h1 {
         font-size: 7vw;
@@ -192,29 +186,57 @@ nav a:hover {
         font-size: 5vw;
     }
 
+    /* ---- */
+
     main {
         max-width: unset;
-        background-size: auto 100vw;
+        background-position: 100% 0;
+        background-size: var(--grid-spacing) var(--grid-spacing), auto 100vw;
     }
+
+    /* ---- */
 
     #intro {
         width: initial;
-        padding: 10vw;
-        text-align: center;
+    }
+
+    #intro .logo {
+        --size: 10vw;
     }
 
     #intro p {
-        text-align: justify;
+        text-align: left;
     }
 
     #intro .block p:last-of-type {
         text-align: initial;
     }
 
+    #myface {
+        display: none;
+    }
+
+    /* ---- */
+
     nav a {
         text-decoration: none;
         margin-right: 5vw;
         font-size: 5vw;
     }
+}
 
+/* -- Accessibility -- */
+
+@media (hover: hover) {
+    nav a:hover {
+        background: var(--color-highlight);
+        font-weight: bold;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --comp-background: 0,0,0;
+        --comp-accent: 255,255,255;
+    }
 }
