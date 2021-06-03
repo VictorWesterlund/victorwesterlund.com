@@ -33,29 +33,15 @@
         </div>
         <div id="myface">
             <picture>
-                <source media="(min-width: 900px)" srcset="assets/img/myface/highres.webp" type="image/webp">
-                <source media="(min-width: 300px)" srcset="assets/img/myface/mediumres.webp" type="image/webp">
-                <source media="(min-width: 900px)" srcset="assets/img/myface/highres.png" type="image/png">
-                <source media="(min-width: 300px)" srcset="assets/img/myface/mediumres.png" type="image/png">
-                <img srcset="assets/img/myface/fallback.jpg" type="image/jpeg">
+                <source srcset="assets/img/myface/highres.avif" type="image/avif" media="(min-width: 1920px)">
+                <source srcset="assets/img/myface/highres.webp" type="image/webp" media="(min-width: 1920px)">
+                <source srcset="assets/img/myface/mediumres.avif" type="image/avif">
+                <source srcset="assets/img/myface/mediumres.webp" type="image/webp">
+                <img src="assets/img/myface/mediumres.png" type="image/png">
             </picture>
         </div>
     </main>
-    <script>
-    // Promote IE to Edge
-    if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
-        window.location = 'microsoft-edge:' + window.location;
-        setTimeout(function() {
-            window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
-        },1);
-    }
-
-    // Register SW if supported by browser
-    if(navigator.serviceWorker) {
-        navigator.serviceWorker.register("sw.js",{
-            scope: "/"
-        });
-    }
-    </script>
+    <script src="assets/js/script.js" type="module"></script>
+    <script src="assets/js/nomodule.js" nomodule></script>
 </body>
 </html>

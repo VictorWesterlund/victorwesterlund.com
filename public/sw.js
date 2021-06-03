@@ -1,23 +1,32 @@
-const version = "1620928311";
+const version = "1622708674";
 const root = "/";
 
 let activeCaches = [
 	`content-${version}`
 ];
 
+let cacheManifest = [
+	"index.html",
+	"assets/css/style.css",
+	"assets/css/fonts.css",
+	"assets/img/favicon.png",
+	"assets/img/pattern.gif",
+	"assets/fonts/RobotoMono-Bold.woff2",
+	"assets/fonts/RobotoMono-Regular.woff2",
+	"assets/js/script.js"
+];
+
+// Download assets and install ServiceWorker
 self.addEventListener("install", event => {
 	event.waitUntil(
-		caches.open(`content-${version}`).then(cache => cache.addAll([
-			root + "index.html",
-			root + "assets/css/style.css",
-			root + "assets/img/favicon.png",
-			root + "assets/img/pattern.gif",
-			root + "assets/fonts/RobotoMono-Bold.woff2",
-			root + "assets/fonts/RobotoMono-Regular.woff2"
-		]))
+		caches.open(`content-${version}`).then(cache => cache.addAll(cacheManifest.map(asset => {
+			// Append the root path to all assets
+			return root + asset;
+		})))
 	)
 });
 
+// Wipe old assets from Cache Storage
 self.addEventListener("activate", event => {
 	event.waitUntil(
 		// Delete inactive caches
@@ -33,7 +42,7 @@ self.addEventListener("activate", event => {
 	)
 });
 
-// Fetch and cache content to bucket
+// Fetch and cache an asset not defined in the manifest
 async function fetchToCache(event) {
 	const networkFetch = fetch(event.request);
 
@@ -73,7 +82,7 @@ self.addEventListener("fetch", event => {
 		return;
 	}
 	
-	// Fetch cross-origin none-asset content
+	// Fetch cross-origin content using the network
 	if(!origin || (url.pathname.substring(1,7) != "assets")) {
 		event.respondWith(fetchContent(url.href));
 		return;
@@ -86,9 +95,8 @@ self.addEventListener("fetch", event => {
 		return;
 	}
 
-	// Respond with content for cache or fetch and save
+	// Respond with content from cache or fetch and save
 	event.respondWith(
 		caches.match(event.request).then(response => response || fetchToCache(event))
 	);
 });
-// Victor Westerlund
