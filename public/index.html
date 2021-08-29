@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Copyright © Victor Westerlund - No libraries! 😲 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,34 +12,37 @@
 </head>
 <body>
     <main>
-        <div id="intro">
-            <div class="inner">
-                <div class="block">
-                    <div class="logo"></div>
-                    <h1><span>victor westerlund</span></h1>
-                    <h2><span>full-stack web developer</span></h2>
+        <div class="screen landingpage">
+            <header>
+                <div class="hamburger center">
+                    <div></div>
                 </div>
-                <div class="block">
-                    <p><span>I create things with code. The things I've created for the public reside as open-source repositories on <a href="https://github.com/VictorWesterlund" ping="https://api.victorwesterlund/log/ping/" target="_blank">GitHub</a>, the rest you'll be lucky to hear about some day.</span></p>
-                    <p><span>Other topics (seemingly irrelevant to programming) I find facinating include but is in no way limited to astronomy, psychology, sociology, economics, ...</span></p>
-                    <p><span><strong>hello@victorwesterlund.com</strong></span>&#8203;(<a href="https://storage.googleapis.com/public.victorwesterlund.com/publickey.gpg" ping="https://api.victorwesterlund/log/ping/" target="_blank">PGP&nbsp;Key</a>)</p>
-                </div>
-                <div class="block">
-                    <nav>
-                        <!--<a href="#">contact</a>-->
-                        <a href="https://github.com/VictorWesterlund" ping="https://api.victorwesterlund/log/ping/" target="_blank">github</a>
-                    </nav>
-                </div>
+                <div class="spacer"></div>
+                <div class="logo"></div>
+                <p>victor westerlund</p>
+            </header>
+            <div class="content">
             </div>
         </div>
-        <div id="myface">
-            <picture>
-                <source srcset="assets/img/myface/highres.avif" type="image/avif" media="(min-width: 1920px)">
-                <source srcset="assets/img/myface/highres.webp" type="image/webp" media="(min-width: 1920px)">
-                <source srcset="assets/img/myface/mediumres.avif" type="image/avif">
-                <source srcset="assets/img/myface/mediumres.webp" type="image/webp">
-                <img src="assets/img/myface/mediumres.png" type="image/png">
-            </picture>
+        <div class="screen menu dark">
+            <header>
+                <div class="hamburger center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28.548" height="22.828"><path d="M2.28 11.414h25.269M1.414 11.414l10-10M1.414 11.414l10 10"/></svg>
+                </div>
+                <div class="spacer"></div>
+                <div class="logo"></div>
+                <p>victor westerlund</p>
+            </header>
+            <div class="content">
+                <div class="button phantom">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <p>contact me</p>
+                </div>
+                <div class="spacer"></div>
+                <div class="button phantom" data="contact">
+                    <p>contact me</p>
+                </div>
+            </div>
         </div>
     </main>
     <script src="assets/js/script.js" type="module"></script>

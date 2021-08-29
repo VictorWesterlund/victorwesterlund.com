@@ -1,19 +1,12 @@
-// Register SW if supported by browser
-if(navigator.serviceWorker) {
-	navigator.serviceWorker.register("sw.js",{
-		scope: "/"
-	});
+function toggleMenu() {
+	const speed = 200;
+	const menu = document.getElementsByTagName("main")[0];
+
+	menu.style.setProperty("transition",`${speed}ms`);
+	menu.classList.toggle("active");
+	setTimeout(() => menu.style.removeProperty("transition"),speed + 1);
 }
 
-const theme = window.matchMedia("(prefers-color-scheme: dark)");
-
-// Set theme color
-function updateTheme() {
-	// Get theme color from stylesheet
-	const color = window.getComputedStyle(document.body).getPropertyValue("--color-background");
-	document.querySelector("meta[name='theme-color']").setAttribute("content",color);
+for(const element of document.getElementsByClassName("hamburger")) {
+	element.addEventListener("click",() => toggleMenu());
 }
-
-// Set theme color and listen for changes
-theme.addEventListener("change",updateTheme);
-updateTheme(theme);

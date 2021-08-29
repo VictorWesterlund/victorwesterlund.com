@@ -1,15 +1,43 @@
-@import url("fonts.css");
-
+/* Copyright © Victor Westerlund - No libraries! 😲 */
 :root {
     --comp-background: 255,255,255;
-    --comp-highlight: 244,242,255;
-    --comp-accent: 33,33,33;
+    --comp-contrast: 33,33,33;
+    --comp-accent: 22,183,255;
 
     --color-background: rgb(var(--comp-background));
-    --color-highlight: rgb(var(--comp-highlight));
+    --color-contrast: rgb(var(--comp-contrast));
     --color-accent: rgb(var(--comp-accent));
 
-    --page-padding: 5vw;
+    --padding: 20px;
+    --border-radius: 10px;
+}
+
+.dark {
+    --comp-background: 33,33,33;
+    --comp-contrast: 255,255,255;
+    --comp-accent: 255,255,255;
+
+    --color-background: rgb(var(--comp-background));
+    --color-contrast: rgb(var(--comp-contrast));
+    --color-accent: rgb(var(--comp-accent));
+}
+
+@font-face {
+    font-family: "Roboto Mono";
+    font-weight: 400;
+    src: local("Roboto Mono Regular"),
+         local("RobotoMono-Regular"),
+         url("../fonts/RobotoMono-Regular.woff2"),
+         url("../fonts/RobotoMono-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Mono";
+    font-weight: 700;
+    src: local("Roboto Mono Bold"),
+         local("RobotoMono-Bold"),
+         url("../fonts/RobotoMono-Bold.woff2"),
+         url("../fonts/RobotoMono-Bold.ttf");
 }
 
 /* -- Cornerstones -- */
@@ -17,7 +45,7 @@
 * {
     margin: 0;
     font-family: "Roboto Mono","Arial",sans-serif;
-    color: var(--color-accent);
+    color: var(--color-contrast);
 }
 
 *::selection {
@@ -26,17 +54,51 @@
 }
 
 html,
-body,
-main,
-main > div {
+body {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+}
+
+main {
+    width: 200vw;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+main.active {
+    transform: translateX(-100vw);
+}
+
+/* ---- */
+
+.screen {
+    width: 100vw;
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+}
+
+.screen .content {
+    box-sizing: border-box;
+    padding: calc(var(--padding) * 1.5);
+    padding-top: 0;
+    flex-grow: 1;
+}
+
+/* -- Positioning -- */
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ---- */
 
 .logo {
-    --size: 5em;
+    --size: 1em;
     --skew: calc(var(--size) / 1.7);
 
     width: 0; 
@@ -51,192 +113,100 @@ main > div {
     border-top: var(--size) solid rgba(var(--comp-accent),.3);
 }
 
-h1 {
-    font-size: 2em;
-}
-
-h2 {
-    font-weight: normal;
-    font-size: 1.42em;
-}
-
-h2 span {
-    color: var(--color-background);
-    background-color: var(--color-accent);
-}
-
-/* -- Layout -- */
-
-main {
-    --grid-spacing: 3vh;
-
-    margin: auto;
-    max-width: 200vh;
-    background: radial-gradient(circle, rgba(var(--comp-accent),.2) .1vh, var(--color-background) .1vh),url("../img/pattern.gif");
-    background-size: var(--grid-spacing) var(--grid-spacing),auto 90%;
-    background-position: 100% 100%;
-    background-repeat: repeat,no-repeat;
-    background-blend-mode: multiply;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-}
-
-main * {
-    image-rendering: initial;
-}
-
-main > div {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-}
-
 /* ---- */
 
-#intro {
-    left: 0;
-    width: 100vh;
+.button {
+    background-color: var(--color-contrast);
+    text-align: center;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding);
+}
+
+.button svg {
+    pointer-events: none;
+    fill: var(--color-contrast);
+    transform: scale(1.2);
+}
+
+.button p {
+    pointer-events: none;
+    font-size: clamp(16px,5vw,22px);
+    color: var(--color-background);
+}
+
+.button.phantom {
+    background-color: rgba(var(--comp-contrast),.1);
+}
+
+.button.phantom p {
+    color: var(--color-contrast);
+}
+
+/* -- Screens -- */
+
+header {
+    --size: 100px;
     box-sizing: border-box;
-    padding: var(--page-padding);
+    padding: var(--padding);
+    height: var(--size);
     display: flex;
     align-items: center;
-    z-index: 1;
+    gap: var(--padding);
+    font-weight: bold;
 }
 
-#intro .inner {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
+header .hamburger {
+    width: calc(var(--size) - (var(--padding) * 2));
+    height: calc(var(--size) - (var(--padding) * 2));
+    box-sizing: border-box;
+    flex-shrink: 0;
+    padding: 15px;
 }
 
-#intro .logo {
-    --size: 7vh;
-    margin-bottom: calc(var(--page-padding) / 2);
-}
-
-#intro .block {
+header .hamburger div {
     width: 100%;
-    font-size: 3vh;
+    height: 2px;
+    background: var(--color-contrast);
+    box-shadow: 0 -10px 0 0 var(--color-contrast), 0 10px 0 0 var(--color-contrast);
 }
 
-#intro .block:last-child {
-    display: flex;
-    align-items: flex-end;
+header .hamburger svg {
+    fill: none;
+    stroke: var(--color-contrast);
+    stroke-linecap: round;
+    stroke-width: 2;
 }
 
-#intro .block p {
-    font-size: .7em;
-    margin-bottom: 1.5em;
-}
-
-#intro .block p span {
-    margin-right: .9em;
-    background-color: var(--color-background);
-}
-
-/* ---- */
-
-nav a {
-    text-decoration: none;
-    margin-right: 2em;
-    font-size: .9em;
-}
-
-nav a::after {
-    content: "→";
-    padding-left: .5em;
-}
-
-/* ---- */
-
-#myface {
-    right: 0;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-}
-
-#myface picture,
-#myface img {
-    position: absolute;
+header .spacer {
+    width: 1px;
     height: 80%;
-    bottom: 0;
-    pointer-events: none;
+    background-color: rgba(var(--comp-contrast),.2);
+}
+
+.dark header .spacer {
+    background-color: black;
+}
+
+header .logo {
+    --size: 25px;
+    margin-top: calc(var(--size) / 2);
+    margin-right: calc(var(--size) / 2);
+}
+
+/* -- Screen > Landingpage -- */
+
+/* -- Screen > Menu -- */
+
+.screen.menu .content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
-#myface img {
-    height: 100%;
-}
-
-/* -- Size Queries -- */
-
-@media (max-width: 1100px) {
-    :root {
-        --page-padding: 50px;
-    }
-
-    h1 {
-        font-size: 7vw;
-    }
-
-    h2 {
-        font-size: 5vw;
-    }
-
-    /* ---- */
-
-    main {
-        max-width: unset;
-        background-position: 100% 0;
-        background-size: var(--grid-spacing) var(--grid-spacing), auto 100vw;
-    }
-
-    /* ---- */
-
-    #intro {
-        width: initial;
-    }
-
-    #intro .logo {
-        --size: 10vw;
-    }
-
-    #intro p {
-        text-align: left;
-    }
-
-    #intro .block p:last-of-type {
-        text-align: initial;
-    }
-
-    #myface {
-        display: none;
-    }
-
-    /* ---- */
-
-    nav a {
-        text-decoration: none;
-        margin-right: 5vw;
-        font-size: 5vw;
-    }
-}
-
-/* -- Accessibility -- */
-
-@media (hover: hover) {
-    nav a:hover {
-        background: var(--color-highlight);
-        font-weight: bold;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --comp-background: 0,0,0;
-        --comp-accent: 255,255,255;
-    }
+.screen.menu .button[data="contact"] {
+    margin-top: auto;
 }
