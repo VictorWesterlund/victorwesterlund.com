@@ -155,8 +155,15 @@ header {
     height: var(--size);
     display: flex;
     align-items: center;
-    gap: var(--padding);
     font-weight: bold;
+}
+
+header > *:nth-child(2) {
+    margin-left: 10px;
+}
+
+header > *:nth-child(n+3) {
+    margin-left: var(--padding);
 }
 
 header .hamburger {
