@@ -1,0 +1,36 @@
+/* -- Transition overrides -- */
+
+body {
+	transition: var(--transition) background-color;
+}
+
+body.modalActive {
+	background-color: var(--color-contrast);
+}
+
+body main .screen {
+	transition: var(--transition) transform;
+}
+
+body.modalActive main .screen {
+	transition: 300ms;
+	transform: scale(.9,.95);
+	opacity: .5;
+	pointer-events: none;
+}
+
+/* -- Boilerplate -- */
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.modal.active {
+	pointer-events: all;
+}

@@ -1,7 +1,22 @@
-import { Interaction } from "./modules/UI.mjs";
+// Copyright © Victor Westerlund - No libraries! 😲
+import { default as Interaction } from "./modules/UI.mjs";
 
-//for(const element of document.getElementsByClassName("hamburger")) {
-//	element.addEventListener("click",() => toggleMenu());
-//}
+const theme = window.matchMedia("(prefers-color-scheme: dark)");
+const main = new Interaction();
 
-const interaction = new Interaction();
+function updateTheme() {
+	const media = window.matchMedia("(prefers-color-scheme: dark)");
+	document.body.classList.remove("dark");
+
+	// Force dark theme on all pages
+	if(media.matches) {
+		document.body.classList.add("dark");
+		return;
+	}
+	
+	main.setThemeColor("background");
+}
+
+// Set the current page theme, and listen for changes
+theme.addEventListener("change",updateTheme);
+updateTheme();

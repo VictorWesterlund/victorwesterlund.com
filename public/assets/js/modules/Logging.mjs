@@ -1,4 +1,6 @@
-export class Logging {
+// Copyright © Victor Westerlund - No libraries! 😲
+
+class Logging {
 	constructor() {
 		this.endpoint = "/log/";
 		this.data = new URLSearchParams();
@@ -23,5 +25,11 @@ export class Logging {
 			const url = this.endpoint + this.data.toString();
 			fetch(url).catch(response => console.log(response));
 		}
+	}
+}
+
+export default class Log {
+	constructor(value,key = "u") {
+		console.log(key,value);
 	}
 }
