@@ -1,6 +1,7 @@
 // Copyright © Victor Westerlund - No libraries! 😲
 
 import { default as Interaction, destroy } from "./UI.mjs";
+import { Button } from "./Components.mjs";
 
 // Boilerplate for creating element overlays
 class Modal extends Interaction {
@@ -11,26 +12,19 @@ class Modal extends Interaction {
 				this.close();
 			}
 		};
+		// Combine template and incoming interactions into one object
 		interactions = Object.assign(interactions,extendedInteractions);
-		super(element,interactions);
+		super(interactions,element);
 
 		this.element = this.applyTemplate(element);
 		this.importStyleSheet();
+		document.body.appendChild(this.element);
 	}
 
 	// Import the companion CSS rules
 	importStyleSheet() {
-		let sheet = "css/modal.css";
-		
-		// Import stylesheet with CSS module script if supported
-		if(document.adoptedStyleSheets) {
-			sheet = "../../" + sheet;
-			const module = import(sheet, {
-				assert: { type: "css" }
-			});
-			module.then(style => document.adoptedStyleSheets = [style.default]);
-			return;
-		}
+		let sheet = "assets/css/modal.css";
+		const element = document.createElement("link");
 
 		// Exit if the stylesheet has already been imported
 		if(document.head.querySelector("link[data-async-modalcss]")) {
@@ -38,8 +32,6 @@ class Modal extends Interaction {
 		}
 
 		// Import the stylesheet with a link tag
-		sheet = "assets/" + sheet;
-		const element = document.createElement("link");
 		element.setAttribute("rel","stylesheet");
 		element.setAttribute("href",sheet);
 		element.setAttribute("data-async-modalcss","");
@@ -49,20 +41,24 @@ class Modal extends Interaction {
 	// Apply a modal template to the provided element
 	applyTemplate(element) {
 		// The inner div will contain modal content
-		const inner = document.createElement("div");
-		inner.classList.add("inner");
-		element.appendChild(inner);
+		this.inner = document.createElement("div");
+		this.inner.classList.add("inner");
+		element.appendChild(this.inner);
 		element.classList.add("modal");
 
 		// PointerEvents on the outer div will close the modal
-		element.addEventListener("click",() => this.close());
+		element.addEventListener("click",event => {
+			if(event.target == element) {
+				this.close();
+			}
+		});
 
 		return element;
 	}
 
 	open() {
 		document.body.classList.add("modalActive");
-		this.element.classList.add("active");
+		setTimeout(() => this.element.classList.add("active"),this.transition / 2);
 	}
 
 	// Close the modal and remove it from the DOM
@@ -70,7 +66,7 @@ class Modal extends Interaction {
 		const activeModals = document.getElementsByClassName("modal");
 		if(!activeModals || activeModals.length === 1) {
 			// Remove active effects if all modals have been closed
-			document.body.classList.remove("modalActive");
+			setTimeout(() => document.body.classList.remove("modalActive"),this.transition / 2);
 		}
 
 		this.element.classList.remove("active");
@@ -91,9 +87,17 @@ export class Card extends Modal {
 		this.element.insertAdjacentHTML("beforeend",content);
 	}
 
-	init() {
+	init(slim) {
 		this.element.classList.add("card");
-		document.body.appendChild(this.element);
+		this.element.classList.add("center");
+		const closeButton = new Button({
+			text: "close",
+			action: "close"
+		});
+		const closeButtonElement = closeButton.getElement();
+
+		this.bind(closeButtonElement);
+		this.inner.appendChild(closeButtonElement);
 	}
 
 	openPage(page) {

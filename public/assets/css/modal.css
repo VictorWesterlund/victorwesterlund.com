@@ -4,10 +4,6 @@ body {
 	transition: var(--transition) background-color;
 }
 
-body.modalActive {
-	background-color: var(--color-contrast);
-}
-
 body main .screen {
 	transition: var(--transition) transform;
 }
@@ -22,6 +18,7 @@ body.modalActive main .screen {
 /* -- Boilerplate -- */
 
 .modal {
+	transition: var(--transition) background-color;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -29,8 +26,37 @@ body.modalActive main .screen {
 	height: 100vh;
 	z-index: 1;
 	pointer-events: none;
+	box-sizing: border-box;
+	background-color: rgba(var(--comp-inverted),0);
+	padding: var(--padding);
 }
 
 .modal.active {
 	pointer-events: all;
+	background-color: rgba(var(--comp-inverted),.4);
+}
+
+.modal .button {
+	background-color: rgba(var(--comp-inverted),.3);
+}
+
+/* -- Cards -- */
+
+.modal.card .inner {
+	transition: var(--transition) transform, var(--transition) opacity;
+	position: relative;
+	background-color: var(--color-contrast);
+	width: calc(100vw - var(--padding));
+	max-width: 600px;
+	align-self: flex-end;
+	box-sizing: border-box;
+	padding: var(--padding);
+	transform: translateY(1vh);
+	border-radius: var(--border-radius);
+	opacity: 0;
+}
+
+.modal.card.active .inner {
+	transform: translateY(0);
+	opacity: 1;
 }

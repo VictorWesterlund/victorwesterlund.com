@@ -2,10 +2,12 @@
 
 :root {
     --comp-background: 255,255,255;
+    --comp-inverted: 0,0,0;
     --comp-contrast: 33,33,33;
     --comp-accent: 22,183,255;
 
     --color-background: rgb(var(--comp-background));
+    --color-inverted: rgb(var(--comp-inverted));
     --color-contrast: rgb(var(--comp-contrast));
     --color-accent: rgb(var(--comp-accent));
 
@@ -17,10 +19,12 @@
 
 .dark {
     --comp-background: 33,33,33;
+    --comp-inverted: 255,255,255;
     --comp-contrast: 255,255,255;
     --comp-accent: 255,255,255;
 
     --color-background: rgb(var(--comp-background));
+    --color-inverted: rgb(var(--comp-inverted));
     --color-contrast: rgb(var(--comp-contrast));
     --color-accent: rgb(var(--comp-accent));
 }
@@ -228,8 +232,7 @@ header .logo {
 }
 
 .screen.landingpage img {
-    width: 100%;
-    max-width: 300px;
+    width: clamp(100px,80vw,40vh);
     align-self: flex-end;
 }
 
