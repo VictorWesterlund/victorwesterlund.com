@@ -23,12 +23,17 @@ body.modalActive main .screen {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	z-index: 1;
 	pointer-events: none;
 	box-sizing: border-box;
 	background-color: rgba(var(--comp-inverted),0);
 	padding: var(--padding);
+}
+
+.modal + .modal {
+	transition: var(--transition) backdrop-filter;
+	backdrop-filter: blur(5px);
 }
 
 .modal.active {
@@ -37,7 +42,35 @@ body.modalActive main .screen {
 }
 
 .modal .button {
-	background-color: rgba(var(--comp-inverted),.3);
+	background-color: rgba(var(--comp-inverted),.05);
+}
+
+.modal .button p {
+	color: var(--color-inverted);
+}
+
+.spinner.logo {
+	--size: 10vw;
+	--anim-speed: 1s;
+	align-self: center;
+	margin-top: var(--padding);
+	margin-left: calc((var(--size) / 2) * -1);
+	animation: logoSpinner var(--anim-speed) infinite alternate linear;
+}
+
+.error {
+	text-align: center;
+	font-size: 20px;
+}
+
+.error:first-line {
+	font-size: 15vw;
+}
+
+@keyframes logoSpinner {
+	to {
+		opacity: .1;
+	}
 }
 
 /* -- Cards -- */
@@ -45,18 +78,25 @@ body.modalActive main .screen {
 .modal.card .inner {
 	transition: var(--transition) transform, var(--transition) opacity;
 	position: relative;
-	background-color: var(--color-contrast);
+	background-color: var(--color-background);
 	width: calc(100vw - var(--padding));
-	max-width: 600px;
+	max-width: 500px;
 	align-self: flex-end;
 	box-sizing: border-box;
 	padding: var(--padding);
 	transform: translateY(1vh);
 	border-radius: var(--border-radius);
 	opacity: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--padding);
 }
 
 .modal.card.active .inner {
 	transform: translateY(0);
 	opacity: 1;
+}
+
+.modal.card .button[data-action="close"] {
+	margin-top: auto;
 }

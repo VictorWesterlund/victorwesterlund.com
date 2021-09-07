@@ -1,0 +1,27 @@
+<style>
+	.contact {
+		display: grid;
+		grid-template-rows: repeat(2, 1fr);
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--padding);
+	}
+
+	.contact .item {
+		height: 140px;
+		border-radius: var(--border-radius);
+		background-color: rgba(var(--comp-inverted),.05);
+	}
+</style>
+<div class="contact">
+	<div class="item" data-action="hello" data-value="signal">
+		<p>Signal</p>
+	</div>
+	<div class="item" data-action="getContact" data-value="email">
+		<p>E-Mail</p>
+	</div>
+	<div class="item">
+		<p>
+	</div>
+	<div class="item">
+	</div>
+</div>

@@ -1,6 +1,14 @@
 // Copyright © Victor Westerlund - No libraries! 😲
+import { default as Preload } from "./modules/Preload.mjs";
 import { default as Interaction } from "./modules/UI.mjs";
 import { default as Debug } from "./modules/Debugging.mjs";
+
+// Load these assets when the DOM is ready (not needed right away)
+const preload = new Preload([
+	"modules/Modals.mjs",
+	"modules/Components.mjs",
+	"modal.css"
+]);
 
 // All default interactions
 const interactions = {

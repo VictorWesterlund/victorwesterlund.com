@@ -17,25 +17,25 @@ class Modal extends Interaction {
 		super(interactions,element);
 
 		this.element = this.applyTemplate(element);
-		this.importStyleSheet();
 		document.body.appendChild(this.element);
 	}
 
-	// Import the companion CSS rules
-	importStyleSheet() {
-		let sheet = "assets/css/modal.css";
-		const element = document.createElement("link");
-
-		// Exit if the stylesheet has already been imported
-		if(document.head.querySelector("link[data-async-modalcss]")) {
-			return false;
+	// Fetch page html from "assets/pages"
+	async getPage(page) {
+		const url = `assets/pages/${page}.html`;
+		const response = await fetch(url);
+		if(!response.ok) {
+			throw new Error(`Modal: Failed to fetch page "${page}"`);
 		}
+		return response.text();
+	}
 
-		// Import the stylesheet with a link tag
-		element.setAttribute("rel","stylesheet");
-		element.setAttribute("href",sheet);
-		element.setAttribute("data-async-modalcss","");
-		document.head.appendChild(element);
+	insertHTML(element) {
+		this.inner.insertAdjacentHTML("afterbegin",element);
+	}
+
+	insertElement(element) {
+		this.inner.insertAdjacentElement("afterbegin",element);
 	}
 
 	// Apply a modal template to the provided element
@@ -83,10 +83,6 @@ export class Card extends Modal {
 		this.init();
 	}
 
-	setContent(content) {
-		this.element.insertAdjacentHTML("beforeend",content);
-	}
-
 	init(slim) {
 		this.element.classList.add("card");
 		this.element.classList.add("center");
@@ -100,7 +96,22 @@ export class Card extends Modal {
 		this.inner.appendChild(closeButtonElement);
 	}
 
+	// Open page from "assets/pages"
 	openPage(page) {
+		// Show a spinner while fetching
+		const spinner = document.createElement("div");
+		spinner.classList = "logo spinner";
+		this.insertElement(spinner);
 		this.open();
+
+		// Fetch the requested page
+		this.getPage(page).then(html => {
+			this.insertHTML(html);
+		}).catch(error => {
+			const element = document.createElement("p");
+			element.classList.add("error");
+			element.innerText = "🤯\nSomething went wrong";
+			this.insertElement(element);
+		}).finally(() => destroy(spinner));
 	}
 }
