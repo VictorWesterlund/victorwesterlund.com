@@ -91,6 +91,10 @@ main.active {
     flex-direction: column;
 }
 
+body.dark .screen.dark {
+    background-color: black;
+}
+
 .screen .content {
     box-sizing: border-box;
     padding: calc(var(--padding) * 1.5);

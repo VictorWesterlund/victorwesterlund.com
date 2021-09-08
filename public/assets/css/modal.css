@@ -6,11 +6,13 @@ body {
 
 body main .screen {
 	transition: var(--transition) transform;
+	transition-delay: calc(var(--transition) / 2);
 }
 
-body.modalActive main .screen {
-	transition: 300ms;
-	transform: scale(.9,.95);
+body .modal.active ~ main .screen {
+	transition: var(--transition);
+	transition-delay: 1ms;
+	transform: scale(.95);
 	opacity: .5;
 	pointer-events: none;
 }
@@ -29,11 +31,6 @@ body.modalActive main .screen {
 	box-sizing: border-box;
 	background-color: rgba(var(--comp-inverted),0);
 	padding: var(--padding);
-}
-
-.modal + .modal {
-	transition: var(--transition) backdrop-filter;
-	backdrop-filter: blur(5px);
 }
 
 .modal.active {

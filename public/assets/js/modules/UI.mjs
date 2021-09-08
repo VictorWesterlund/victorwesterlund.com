@@ -17,15 +17,29 @@ export default class Interaction extends Logging {
 		this.interactions = interactions;
 		this.attribute = "data-action"; // Target elements with this attribute
 
-		// Bind listeners to the target attribute within the provided scope
-		const elements = scope.querySelectorAll(`[${this.attribute}]`);
+		this.bindAll(scope);
+	}
+
+	// Bind event listeners to this element
+	bind(element) {
+		if(element.hasAttribute("data-bound") || !element.hasAttribute(this.attribute)) {
+			return false;
+		}
+		element.addEventListener("click",event => this.pointerEvent(event));
+		element.setAttribute("data-bound","");
+	}
+
+	// Get all elements with the target attribute in scope
+	getAll(scope) {
+		return scope.querySelectorAll(`[${this.attribute}]`);
+	}
+
+	// Bind listeners to all attributed elements within scope
+	bindAll(scope) {
+		const elements = this.getAll(scope);
 		for(const element of elements) {
 			this.bind(element);
 		}
-	}
-
-	bind(element) {
-		element.addEventListener("click",event => this.pointerEvent(event));
 	}
 
 	// Set the page theme color (and the theme-color meta tag)

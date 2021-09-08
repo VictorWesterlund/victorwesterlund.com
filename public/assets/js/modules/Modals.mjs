@@ -17,12 +17,13 @@ class Modal extends Interaction {
 		super(interactions,element);
 
 		this.element = this.applyTemplate(element);
-		document.body.appendChild(this.element);
+		this.element.close = () => this.close(); // Bind close to element prototype
+		document.body.insertAdjacentElement("afterbegin",this.element);
 	}
 
 	// Fetch page html from "assets/pages"
 	async getPage(page) {
-		const url = `assets/pages/${page}.html`;
+		const url = `assets/pages/${page}`;
 		const response = await fetch(url);
 		if(!response.ok) {
 			throw new Error(`Modal: Failed to fetch page "${page}"`);
@@ -57,18 +58,11 @@ class Modal extends Interaction {
 	}
 
 	open() {
-		document.body.classList.add("modalActive");
 		setTimeout(() => this.element.classList.add("active"),this.transition / 2);
 	}
 
 	// Close the modal and remove it from the DOM
 	close() {
-		const activeModals = document.getElementsByClassName("modal");
-		if(!activeModals || activeModals.length === 1) {
-			// Remove active effects if all modals have been closed
-			setTimeout(() => document.body.classList.remove("modalActive"),this.transition / 2);
-		}
-
 		this.element.classList.remove("active");
 		setTimeout(() => destroy(this.element),this.transition + 1); // Wait for transition
 	}
@@ -90,10 +84,27 @@ export class Card extends Modal {
 			text: "close",
 			action: "close"
 		});
-		const closeButtonElement = closeButton.getElement();
 
-		this.bind(closeButtonElement);
-		this.inner.appendChild(closeButtonElement);
+		this.bind(closeButton.element);
+		this.inner.appendChild(closeButton.element);
+	}
+
+	error(message) {
+		const oops = document.createElement("p");
+		const infoButton = new Button({
+			text: "more info"
+		});
+
+		oops.classList.add("error");
+		oops.innerText = "🤯\nSomething went wrong";
+
+		infoButton.element.addEventListener("click",() => {
+			oops.innerText = "📋\n" + message;
+			destroy(infoButton.element);
+		});
+
+		this.insertElement(infoButton.element);
+		this.insertElement(oops);
 	}
 
 	// Open page from "assets/pages"
@@ -107,11 +118,9 @@ export class Card extends Modal {
 		// Fetch the requested page
 		this.getPage(page).then(html => {
 			this.insertHTML(html);
-		}).catch(error => {
-			const element = document.createElement("p");
-			element.classList.add("error");
-			element.innerText = "🤯\nSomething went wrong";
-			this.insertElement(element);
-		}).finally(() => destroy(spinner));
+			this.bindAll(this.inner);
+		})
+		.catch(error => this.error(error))
+		.finally(() => destroy(spinner));
 	}
 }

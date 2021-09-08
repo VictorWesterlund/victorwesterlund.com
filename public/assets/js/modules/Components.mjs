@@ -5,10 +5,6 @@ class Component {
 	constructor(tag) {
 		this.element = document.createElement(tag); // Root element
 	}
-
-	getElement() {
-		return this.element;
-	}
 }
 
 // ⬇ UI Components ⬇

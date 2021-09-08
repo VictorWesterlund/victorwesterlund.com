@@ -23,14 +23,19 @@ const interactions = {
 	openContactCard: () => {
 		const module = import("./modules/Modals.mjs");
 		const interactions = {
-			hello: () => {
-				console.log("Hello world");
+			getContact: (event) => {
+				const service = event.target.getAttribute("data-value");
+				module.then(modals => {
+					event.target.closest(".modal").close();
+					const card = new modals.Card(interactions);
+					card.openPage(service);
+				});
 			}
 		};
 
 		module.then(modals => {
 			const card = new modals.Card(interactions);
-			card.openPage("contact_card");
+			card.openPage("contact");
 		});
 	}
 }
@@ -54,3 +59,4 @@ function updateTheme() {
 // Set the current page theme, and listen for changes
 theme.addEventListener("change",updateTheme);
 updateTheme();
+window._debug.openContactsModal();

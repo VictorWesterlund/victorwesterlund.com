@@ -38,6 +38,20 @@ class Debug {
 			card.open();
 		});
 	}
+
+	invalidCard() {
+		const module = import("./Modals.mjs");
+		const interactions = {
+			hello: () => {
+				console.log("Hello world");
+			}
+		};
+
+		module.then(modals => {
+			const card = new modals.Card(interactions);
+			card.openPage("invalid_card");
+		});
+	}
 }
 
 export default window._debug = new Debug();
