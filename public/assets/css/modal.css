@@ -1,9 +1,5 @@
 /* -- Transition overrides -- */
 
-body {
-	transition: var(--transition) background-color;
-}
-
 body main .screen {
 	transition: var(--transition) transform;
 	transition-delay: calc(var(--transition) / 2);
@@ -39,12 +35,39 @@ body .modal.active ~ main .screen {
 }
 
 .modal .button {
-	background-color: rgba(var(--comp-inverted),.05);
+	align-self: stretch;
 }
 
-.modal .button p {
-	color: var(--color-inverted);
+.modal .inner {
+	transition: var(--transition) transform, var(--transition) opacity;
+	position: relative;
+	background-color: var(--color-background);
+	width: calc(100vw - var(--padding));
+	max-width: 500px;
+	max-height: 100%;
+	overflow-y: auto;
+	word-break: break-word;
+	box-sizing: border-box;
+	padding: var(--padding);
+	border-radius: var(--border-radius);
+	opacity: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--padding);
 }
+
+.modal.active .inner {
+	opacity: 1;
+}
+
+.modal .inner > h1,
+.modal .inner > h2,
+.modal .inner > p {
+	text-align: center;
+}
+
+/* ---- */
 
 .spinner.logo {
 	--size: 10vw;
@@ -70,30 +93,42 @@ body .modal.active ~ main .screen {
 	}
 }
 
+/* ---- */
+
+.modal h1 {
+	font-size: clamp(20px,2vw,20px);
+}
+
+.modal pre {
+	align-self: stretch;
+	overflow: scroll;
+	background-color: black;
+	color: white;
+	padding: 10px 15px;
+    border-radius: 6px;
+}
+
 /* -- Cards -- */
 
 .modal.card .inner {
-	transition: var(--transition) transform, var(--transition) opacity;
-	position: relative;
-	background-color: var(--color-background);
-	width: calc(100vw - var(--padding));
-	max-width: 500px;
 	align-self: flex-end;
-	box-sizing: border-box;
-	padding: var(--padding);
 	transform: translateY(1vh);
-	border-radius: var(--border-radius);
-	opacity: 0;
-	display: flex;
-	flex-direction: column;
-	gap: var(--padding);
 }
 
 .modal.card.active .inner {
 	transform: translateY(0);
-	opacity: 1;
 }
 
 .modal.card .button[data-action="close"] {
 	margin-top: auto;
+}
+
+/* -- Dialogs -- */
+
+.modal.dialog .inner {
+	transform: scale(.95);
+}
+
+.modal.dialog.active .inner {
+	transform: scale(1);
 }

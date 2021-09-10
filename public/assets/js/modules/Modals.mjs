@@ -16,6 +16,8 @@ class Modal extends Interaction {
 		interactions = Object.assign(interactions,extendedInteractions);
 		super(interactions,element);
 
+		this.transition = 300;
+
 		this.element = this.applyTemplate(element);
 		this.element.close = () => this.close(); // Bind close to element prototype
 		document.body.insertAdjacentElement("afterbegin",this.element);
@@ -26,7 +28,15 @@ class Modal extends Interaction {
 		const url = `assets/pages/${page}`;
 		const response = await fetch(url);
 		if(!response.ok) {
-			throw new Error(`Modal: Failed to fetch page "${page}"`);
+			const report = {
+				"self": "Modal.getPage()",
+				"self_page": page,
+				"resp_status": response.status,
+				"resp_statusText": response.statusText,
+				"resp_url": response.url,
+				"rqst_ua": navigator.userAgent  
+			};
+			throw new Error(JSON.stringify(report,null,2));
 		}
 		return response.text();
 	}
@@ -68,21 +78,40 @@ class Modal extends Interaction {
 	}
 }
 
-// Overlay with a slide-in animation from the bottom of the viewport
-export class Card extends Modal {
-	constructor(interactions) {
+export class Dialog extends Modal {
+	constructor(interactions = {}) {
 		super(interactions);
-
-		this.transition = 300;
 		this.init();
 	}
 
-	init(slim) {
+	init() {
+		this.element.classList.add("dialog");
+		this.element.classList.add("center");
+		const closeButton = new Button({
+			text: "close",
+			action: "close",
+			type: "phantom"
+		});
+
+		this.bind(closeButton.element);
+		this.inner.appendChild(closeButton.element);
+	}
+}
+
+// Overlay with a slide-in animation from the bottom of the viewport
+export class Card extends Modal {
+	constructor(interactions = {}) {
+		super(interactions);
+		this.init();
+	}
+
+	init() {
 		this.element.classList.add("card");
 		this.element.classList.add("center");
 		const closeButton = new Button({
 			text: "close",
-			action: "close"
+			action: "close",
+			type: "phantom"
 		});
 
 		this.bind(closeButton.element);
@@ -91,19 +120,22 @@ export class Card extends Modal {
 
 	error(message) {
 		const oops = document.createElement("p");
-		const infoButton = new Button({
-			text: "more info"
-		});
+		const infoButton = document.createElement("p");
 
 		oops.classList.add("error");
 		oops.innerText = "🤯\nSomething went wrong";
+		infoButton.innerText = "more info..";
 
-		infoButton.element.addEventListener("click",() => {
-			oops.innerText = "📋\n" + message;
-			destroy(infoButton.element);
+		infoButton.addEventListener("click",() => {
+			const details = new Dialog();
+
+			details.insertHTML(`<h1>📄 Error report</h1><pre>${message}</pre>`);
+			details.open();
+
+			this.close();
 		});
 
-		this.insertElement(infoButton.element);
+		this.insertElement(infoButton);
 		this.insertElement(oops);
 	}
 
@@ -112,6 +144,7 @@ export class Card extends Modal {
 		// Show a spinner while fetching
 		const spinner = document.createElement("div");
 		spinner.classList = "logo spinner";
+		this.element.setAttribute("data-page",page);
 		this.insertElement(spinner);
 		this.open();
 

@@ -78,7 +78,15 @@ main {
     display: flex;
 }
 
-main.active {
+body.menuActive {
+    background-color: var(--color-contrast);
+}
+
+body.dark.menuActive {
+    background-color: black;
+}
+
+body.menuActive main {
     transform: translateX(-100vw);
 }
 
@@ -93,6 +101,10 @@ main.active {
 
 body.dark .screen.dark {
     background-color: black;
+}
+
+.screen .inner {
+    display: contents;
 }
 
 .screen .content {
@@ -131,7 +143,6 @@ body.dark .screen.dark {
 /* ---- */
 
 .button {
-    background-color: var(--color-contrast);
     text-align: center;
     padding: 25px;
     border-radius: var(--border-radius);
@@ -139,6 +150,16 @@ body.dark .screen.dark {
     justify-content: center;
     align-items: center;
     gap: var(--padding);
+}
+
+.button.solid {
+    background-color: var(--color-contrast);
+    color: var(--color-background);
+}
+
+.button.phantom {
+    background-color: rgba(var(--comp-inverted),.05);
+    color: var(--color-contrast);
 }
 
 .button svg {
@@ -150,15 +171,7 @@ body.dark .screen.dark {
 .button p {
     pointer-events: none;
     font-size: clamp(16px,5vw,22px);
-    color: var(--color-background);
-}
-
-.button.phantom {
-    background-color: rgba(var(--comp-contrast),.1);
-}
-
-.button.phantom p {
-    color: var(--color-contrast);
+    color: inherit;
 }
 
 .button.loading p {

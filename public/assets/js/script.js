@@ -17,7 +17,7 @@ const interactions = {
 		const menu = document.getElementsByTagName("main")[0];
 	
 		menu.style.setProperty("transition",`${speed}ms`);
-		menu.classList.toggle("active");
+		document.body.classList.toggle("menuActive");
 		setTimeout(() => menu.style.removeProperty("transition"),speed + 1);
 	},
 	openContactCard: () => {
@@ -30,6 +30,14 @@ const interactions = {
 					const card = new modals.Card(interactions);
 					card.openPage(service);
 				});
+			},
+			copyText: (event) => {
+				const memory = event.target.innerText;
+				event.target.classList.add("bounce");
+				event.target.innerText = "Copied!";
+				setTimeout(() => {
+					event.target.innerText = memory;
+				},this.transition);
 			}
 		};
 
@@ -52,11 +60,8 @@ function updateTheme() {
 		document.body.classList.add("dark");
 		return;
 	}
-	
-	main.setThemeColor("background");
 }
 
 // Set the current page theme, and listen for changes
 theme.addEventListener("change",updateTheme);
 updateTheme();
-window._debug.openContactsModal();

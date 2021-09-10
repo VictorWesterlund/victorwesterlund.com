@@ -42,30 +42,6 @@ export default class Interaction extends Logging {
 		}
 	}
 
-	// Set the page theme color (and the theme-color meta tag)
-	setThemeColor(color) {
-		const meta = document.head.querySelector("meta[name='theme-color']");
-		const style = getComputedStyle(document.body);
-	
-		if(!meta || !color) {
-			return false;
-		}
-
-		// Dark mode will always use the background color
-		if(document.body.classList.contains("dark")) {
-			color = "background";
-		}
-	
-		if(color[0] !== "#") {
-			// Get CSS variable if color isn't a HEX code
-			color = style.getPropertyValue(`--color-${color}`);
-			color = color.replaceAll(" ","");
-		}
-		
-		document.body.style.setProperty("background-color",color);
-		meta.setAttribute("content",color);
-	}
-
 	// Handle click/touch interactions
 	pointerEvent(event) {
 		const target = event.target.closest(`[${this.attribute}]`);
@@ -77,10 +53,5 @@ export default class Interaction extends Logging {
 		}
 		// Execute the function from the data-action attribute
 		this.interactions[action](event);
-
-		// The button has requested a theme-color change
-		if(target.hasAttribute("data-theme-color")) {
-			this.setThemeColor(target.getAttribute("data-theme-color"));
-		}
 	}
 }

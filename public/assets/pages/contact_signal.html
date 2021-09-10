@@ -1,3 +1,38 @@
 <style>
+	body:not(.dark) .modal[data-page="contact_signal"] .inner {
+		--comp-inverted: 255,255,255;
+		--comp-background: 58,118,240;
+
+		--color-background: rgb(var(--comp-background));
+		--color-inverted: rgb(var(--comp-inverted));
+	}
+
+	body:not(.dark) .modal[data-page="contact_signal"] .button.solid {
+		background-color: var(--color-inverted);
+		color: var(--color-background);
+	}
+
+	.modal .inner > h1,
+	.modal .inner > p,
+	.modal .button.phantom {
+		color: var(--color-inverted);
+	}
+
+	/* ---- */
+
+	#logo_signal {
+		width: clamp(100px,50%,200px);
+	}
+
+	#number {
+		background: black;
+		padding: 10px 15px;
+		border-radius: 6px;
+	}
 </style>
-<img src="assets/img/icons/signal.svg"/>
+<img id="logo_signal" src="assets/img/icons/signal.svg"/>
+<h1 id="number">+4670-2452459</h1>
+<p>Signal is a free and encrypted message platform with apps for all major platforms.</p>
+<div class="button solid" data-action="copyText">
+	<p>copy number</p>
+</div>

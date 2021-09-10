@@ -12,19 +12,40 @@ class Component {
 export class Button extends Component {
 	constructor(properties) {
 		super("div");
+		this.properties = properties;
 		this.element.classList.add("button");
 
-		this.setText(properties.text);
-		this.setAction(properties.action);
+		this.setText();
+		this.setAction();
+		this.setType();
 	}
 
-	setText(text) {
+	setText() {
+		if(!this.properties.text) {
+			return false;
+		}
 		const textElement = document.createElement("p");
-		textElement.innerText = text;
+		textElement.innerText = this.properties.text;
 		this.element.appendChild(textElement);
 	}
 
-	setAction(action) {
-		this.element.setAttribute("data-action",action);
+	setAction() {
+		if(!this.properties.action) {
+			return false;
+		}
+		this.element.setAttribute("data-action",this.properties.action);
+	}
+
+	setType() {
+		const types = [
+			"solid",
+			"phantom"
+		];
+		const type = types.includes(this.properties.type) ? this.properties.type : false;
+
+		if(!this.properties.type || !type) {
+			return false;
+		}
+		this.element.classList.add(type);
 	}
 }
