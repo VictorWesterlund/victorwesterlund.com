@@ -67,6 +67,64 @@ class Modal extends Interaction {
 		return element;
 	}
 
+	error(message) {
+		const oops = document.createElement("p");
+		const infoButton = document.createElement("p");
+
+		oops.classList.add("error");
+		oops.innerText = "🤯\nSomething went wrong";
+
+		infoButton.innerText = "more info..";
+		infoButton.addEventListener("click",() => {
+			const details = new Dialog();
+
+			details.insertHTML(`<h1>📄 Error report</h1><pre>${message}</pre>`);
+			details.open();
+
+			this.close();
+		});
+
+		this.insertElement(infoButton);
+		this.insertElement(oops);
+	}
+
+	// Open page from "assets/pages"
+	openPage(page) {
+		// Show a spinner while fetching
+		const spinner = document.createElement("div");
+		spinner.classList = "logo spinner";
+		this.element.setAttribute("data-page",page);
+		this.insertElement(spinner);
+		this.open();
+
+		// Fetch the requested page
+		this.getPage(page).then(html => {
+			this.insertHTML(html);
+			this.bindAll(this.inner);
+		})
+		.catch(error => {
+			const tryAgain = new Button({
+				text: "try again",
+				type: "solid"
+			});
+			tryAgain.element.addEventListener("click",() => {
+				// Clear and recreate modal structure
+				destroy(this.inner);
+				this.applyTemplate(this.element);
+				this.init();
+				this.insertElement(spinner);
+				// Attempt to fetch the requested url again (with soft rate-limiting)
+				setTimeout(() => {
+					this.openPage(page);
+					destroy(spinner);
+				},500);
+			});
+			this.insertElement(tryAgain.element);
+			this.error(error);
+		})
+		.finally(() => destroy(spinner));
+	}
+
 	open() {
 		setTimeout(() => this.element.classList.add("active"),this.transition / 2);
 	}
@@ -116,59 +174,5 @@ export class Card extends Modal {
 
 		this.bind(closeButton.element);
 		this.inner.appendChild(closeButton.element);
-	}
-
-	error(message) {
-		const oops = document.createElement("p");
-		const infoButton = document.createElement("p");
-
-		oops.classList.add("error");
-		oops.innerText = "🤯\nSomething went wrong";
-
-		infoButton.innerText = "more info..";
-		infoButton.addEventListener("click",() => {
-			const details = new Dialog();
-
-			details.insertHTML(`<h1>📄 Error report</h1><pre>${message}</pre>`);
-			details.open();
-
-			this.close();
-		});
-
-		this.insertElement(infoButton);
-		this.insertElement(oops);
-	}
-
-	// Open page from "assets/pages"
-	openPage(page) {
-		// Show a spinner while fetching
-		const spinner = document.createElement("div");
-		spinner.classList = "logo spinner";
-		this.element.setAttribute("data-page",page);
-		this.insertElement(spinner);
-		this.open();
-
-		// Fetch the requested page
-		this.getPage(page).then(html => {
-			this.insertHTML(html);
-			this.bindAll(this.inner);
-		})
-		.catch(error => {
-			const tryAgain = new Button({
-				text: "try again",
-				type: "solid"
-			});
-			tryAgain.element.addEventListener("click",() => {
-				// Clear and recreate modal structure
-				destroy(this.inner);
-				this.applyTemplate(this.element);
-				this.init();
-				// Attempt to fetch the requested url again
-				this.openPage(page);
-			});
-			this.insertElement(tryAgain.element);
-			this.error(error);
-		})
-		.finally(() => destroy(spinner));
 	}
 }

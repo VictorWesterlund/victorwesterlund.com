@@ -13,6 +13,10 @@ body .modal.active ~ main .screen {
 	pointer-events: none;
 }
 
+.modal.active + .modal {
+	z-index: 5;
+}
+
 /* -- Boilerplate -- */
 
 .modal {

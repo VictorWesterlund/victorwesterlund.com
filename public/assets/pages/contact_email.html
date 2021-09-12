@@ -1,35 +1,4 @@
 <style>
-	body:not(.dark) .modal[data-page="contact_signal"] .inner {
-		--palette-inverted: 255,255,255;
-		--palette-background: 58,118,240;
-
-		--swatch-background: rgb(var(--palette-background));
-		--swatch-inverted: rgb(var(--palette-inverted));
-	}
-
-	body:not(.dark) .modal[data-page="contact_signal"] .button.solid {
-		background-color: var(--swatch-inverted);
-		color: var(--swatch-background);
-	}
-
-	.modal .inner > h1,
-	.modal .inner > p,
-	.modal .button.phantom {
-		color: var(--swatch-inverted);
-	}
-
-	/* ---- */
-
-	#logo_signal {
-		width: clamp(100px,50%,200px);
-	}
-
-	#number {
-		background: black;
-		padding: 10px 15px;
-		border-radius: 6px;
-	}
-
 	.button.copied {
 		pointer-events: none;
 		animation: beat 500ms forwards;
@@ -60,16 +29,36 @@
 		100% { transform: translateY(calc(var(--padding) * -1)); opacity: 0; }
 	}
 
+	#interaction {
+		color: var(--swatch-accent);
+		cursor: pointer;
+	}
+
+	#interaction::before {
+		content: "tap ";
+	}
+
 	@media (max-width: 300px) {
 		.button.copied p:last-of-type {
 			display: initial;
 		}
 	}
+
+	@media (pointer: fine) {
+		#interaction::before {
+			content: "click ";
+		}
+	}
 </style>
-<img id="logo_signal" src="assets/img/icons/signal.svg"/>
-<h1 id="number">+4670-2452459</h1>
-<p>Signal is a free and encrypted message platform with apps for all major platforms.</p>
+<div class="button phantom" data-action="showPgpKey">
+	<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+	<p>show PGP key</p>
+</div>
+<p></p>
+<h1>hello@victorwesterlund.com</h1>
+<p>You can also <a id="interaction" href="mailto:hello@victorwesterlund.com?subject=Hello Victor!">here</a> to send a mail directly from your mail app</p>
+<p></p>
 <div class="button solid" data-action="copyText">
 	<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18 2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H9V4h9v12zM3 15v-2h2v2H3zm0-5.5h2v2H3v-2zM10 20h2v2h-2v-2zm-7-1.5v-2h2v2H3zM5 22c-1.1 0-2-.9-2-2h2v2zm3.5 0h-2v-2h2v2zm5 0v-2h2c0 1.1-.9 2-2 2zM5 6v2H3c0-1.1.9-2 2-2z"/></svg>
-	<p>copy number</p>
+	<p>copy email</p>
 </div>

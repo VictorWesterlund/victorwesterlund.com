@@ -67,7 +67,9 @@
     color: var(--swatch-accent);
 }
 
+a,
 picture {
+    text-decoration: none;
     display: contents;
 }
 

@@ -1,6 +1,6 @@
 // Copyright © Victor Westerlund - No libraries! 😲
 import { default as Preload } from "./modules/Preload.mjs";
-import { default as Interaction } from "./modules/UI.mjs";
+import { default as Interaction, destroy } from "./modules/UI.mjs";
 import "./modules/Debugging.mjs";
 
 // Load these assets when the DOM is ready (not needed right away)
@@ -37,7 +37,7 @@ const interactions = {
 		const module = import("./modules/Modals.mjs");
 		const interactions = {
 			getContact: (event) => {
-				const service = event.target.getAttribute("data-value");
+				const service = event.target.dataset.value;
 				module.then(modals => {
 					event.target.closest(".modal").close();
 					const card = new modals.Card(interactions);
@@ -45,12 +45,21 @@ const interactions = {
 				});
 			},
 			copyText: (event) => {
-				const memory = event.target.innerText;
-				event.target.classList.add("bounce");
-				event.target.innerText = "copied!";
+				event.target.classList.add("copied");
+				const copied = document.createElement("p");
+				copied.innerText = "copied!";
+				event.target.appendChild(copied);
+				
 				setTimeout(() => {
-					event.target.innerText = memory;
+					event.target.classList.remove("copied");
+					destroy(copied);
 				},1000);
+			},
+			showPgpKey: () => {
+				module.then(modals => {
+					const dialog = new modals.Dialog();
+					dialog.openPage("contact_email_pgp");
+				});
 			}
 		};
 
@@ -58,10 +67,6 @@ const interactions = {
 			const card = new modals.Card(interactions);
 			card.openPage("contact");
 		});
-	},
-	openSearch: () => {
-		const module = import("./modules/Search.mjs");
-		document.body.classList.add("searchActive");
 	}
 }
 
