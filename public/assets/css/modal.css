@@ -22,16 +22,16 @@ body .modal.active ~ main .screen {
 	left: 0;
 	width: 100vw;
 	height: 100%;
-	z-index: 1;
+	z-index: 10;
 	pointer-events: none;
 	box-sizing: border-box;
-	background-color: rgba(var(--comp-inverted),0);
+	background-color: rgba(var(--palette-inverted),0);
 	padding: var(--padding);
 }
 
 .modal.active {
 	pointer-events: all;
-	background-color: rgba(var(--comp-inverted),.4);
+	background-color: rgba(var(--palette-inverted),.4);
 }
 
 .modal .button {
@@ -41,7 +41,7 @@ body .modal.active ~ main .screen {
 .modal .inner {
 	transition: var(--transition) transform, var(--transition) opacity;
 	position: relative;
-	background-color: var(--color-background);
+	background-color: var(--swatch-background);
 	width: calc(100vw - var(--padding));
 	max-width: 500px;
 	max-height: 100%;
@@ -50,6 +50,7 @@ body .modal.active ~ main .screen {
 	box-sizing: border-box;
 	padding: var(--padding);
 	border-radius: var(--border-radius);
+	box-shadow: 0 3px 30px 0 rgba(var(--palette-contrast),.2);
 	opacity: 0;
 	display: flex;
 	flex-direction: column;
@@ -70,7 +71,7 @@ body .modal.active ~ main .screen {
 /* ---- */
 
 .spinner.logo {
-	--size: 10vw;
+	--size: clamp(30px,5vw,60px);
 	--anim-speed: 1s;
 	align-self: center;
 	margin-top: var(--padding);
@@ -84,7 +85,7 @@ body .modal.active ~ main .screen {
 }
 
 .error:first-line {
-	font-size: 15vw;
+	font-size: 50px;
 }
 
 @keyframes logoSpinner {
@@ -131,4 +132,35 @@ body .modal.active ~ main .screen {
 
 .modal.dialog.active .inner {
 	transform: scale(1);
+}
+
+@media (min-aspect-ratio: 14/9) {
+	/* -- Transition overrides -- */
+
+	body main .screen {
+		transition: unset;
+	}
+	
+	body .modal.active ~ main .screen {
+		transition: unset;
+		transform: unset;
+		opacity: unset;
+	}
+
+	body .modal {
+		transition: var(--transition);
+		transition-delay: calc(var(--transition) / 2);
+		backdrop-filter: blur(0);
+	}
+	
+	body .modal.active {
+		transition-delay: 1ms;
+		backdrop-filter: blur(10px);
+	}
+
+	/* -- Boilerplate -- */
+
+	.modal.card .inner {
+		align-self: unset;
+	}
 }

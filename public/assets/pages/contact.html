@@ -11,7 +11,7 @@
 		width: var(--size);
 		height: var(--size);
 		border-radius: var(--border-radius);
-		background-color: rgba(var(--comp-inverted),.05);
+		background-color: rgba(var(--palette-inverted),.05);
 		flex-direction: column;
 		justify-content: space-between;
 		box-sizing: border-box;
@@ -23,21 +23,21 @@
 	}
 
 	.contact .item img {
-		height: 70%;
+		height: 10vh;
 	}
 
-	@media (max-width: 258px) {
+	@media (max-width: 300px) {
 		.contact {
 			grid-template-columns: 1fr;
 		}
 	}
 </style>
 <div class="contact">
-	<div class="item center" data-action="getContact" data-value="contact_signal">
+	<div class="item button phantom" data-action="getContact" data-value="contact_signal">
 		<img src="assets/img/icons/signal.svg"/>
 		<p>Signal</p>
 	</div>
-	<div class="item center" data-action="getContact" data-value="contact_email">
+	<div class="item button phantom" data-action="getContact" data-value="contact_email">
 		<img src="assets/img/icons/email.svg"/>
 		<p>E-Mail</p>
 	</div>

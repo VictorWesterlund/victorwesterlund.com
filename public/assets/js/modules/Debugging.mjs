@@ -9,7 +9,9 @@ class Debug {
 		const functions = [
 			"list",
 			"toggleMenu",
-			"openContactsModal"
+			"openContactsModal",
+			"invalidCard",
+			"infiniteLoadingCard"
 		];
 		console.log("Available functions:",functions.map(f => `window._debug.${f}();`));
 	}
@@ -50,6 +52,18 @@ class Debug {
 		module.then(modals => {
 			const card = new modals.Card(interactions);
 			card.openPage("invalid_card");
+		});
+	}
+
+	infiniteLoadingCard() {
+		const module = import("./Modals.mjs");
+		const spinner = document.createElement("div");
+		spinner.classList = "logo spinner";
+
+		module.then(modals => {
+			const card = new modals.Card(new Object());
+			card.insertElement(spinner);
+			card.open();
 		});
 	}
 }

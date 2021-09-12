@@ -19,7 +19,7 @@ class Modal extends Interaction {
 		this.transition = 300;
 
 		this.element = this.applyTemplate(element);
-		this.element.close = () => this.close(); // Bind close to element prototype
+		this.element.close = () => this.close(); // Bind modal close to element prototype
 		document.body.insertAdjacentElement("afterbegin",this.element);
 	}
 
@@ -124,8 +124,8 @@ export class Card extends Modal {
 
 		oops.classList.add("error");
 		oops.innerText = "🤯\nSomething went wrong";
-		infoButton.innerText = "more info..";
 
+		infoButton.innerText = "more info..";
 		infoButton.addEventListener("click",() => {
 			const details = new Dialog();
 
@@ -153,7 +153,22 @@ export class Card extends Modal {
 			this.insertHTML(html);
 			this.bindAll(this.inner);
 		})
-		.catch(error => this.error(error))
+		.catch(error => {
+			const tryAgain = new Button({
+				text: "try again",
+				type: "solid"
+			});
+			tryAgain.element.addEventListener("click",() => {
+				// Clear and recreate modal structure
+				destroy(this.inner);
+				this.applyTemplate(this.element);
+				this.init();
+				// Attempt to fetch the requested url again
+				this.openPage(page);
+			});
+			this.insertElement(tryAgain.element);
+			this.error(error);
+		})
 		.finally(() => destroy(spinner));
 	}
 }

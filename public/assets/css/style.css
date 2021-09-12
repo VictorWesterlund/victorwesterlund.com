@@ -1,16 +1,19 @@
 /* Copyright © Victor Westerlund - No libraries! 😲 */
 
 :root {
-    --comp-background: 255,255,255;
-    --comp-inverted: 0,0,0;
-    --comp-contrast: 33,33,33;
-    --comp-accent: 22,183,255;
+    /* Component colors */
+    --palette-background: 255,255,255;
+    --palette-inverted: 0,0,0;
+    --palette-contrast: 33,33,33;
+    --palette-accent: 22,183,255;
 
-    --color-background: rgb(var(--comp-background));
-    --color-inverted: rgb(var(--comp-inverted));
-    --color-contrast: rgb(var(--comp-contrast));
-    --color-accent: rgb(var(--comp-accent));
+    /* Compiled colors */
+    --swatch-background: rgb(var(--palette-background));
+    --swatch-inverted: rgb(var(--palette-inverted));
+    --swatch-contrast: rgb(var(--palette-contrast));
+    --swatch-accent: rgb(var(--palette-accent));
 
+    /* Default styles */
     --padding: 20px;
     --border-radius: 10px;
     --header-height: 100px;
@@ -18,15 +21,19 @@
 }
 
 .dark {
-    --comp-background: 33,33,33;
-    --comp-inverted: 255,255,255;
-    --comp-contrast: 255,255,255;
-    --comp-accent: 255,255,255;
+    --palette-background: 33,33,33;
+    --palette-inverted: 255,255,255;
+    --palette-contrast: 255,255,255;
+    --palette-accent: 255,255,255;
 
-    --color-background: rgb(var(--comp-background));
-    --color-inverted: rgb(var(--comp-inverted));
-    --color-contrast: rgb(var(--comp-contrast));
-    --color-accent: rgb(var(--comp-accent));
+    --swatch-background: rgb(var(--palette-background));
+    --swatch-inverted: rgb(var(--palette-inverted));
+    --swatch-contrast: rgb(var(--palette-contrast));
+    --swatch-accent: rgb(var(--palette-accent));
+}
+
+.wide { 
+    display: none; /* Hide wide-screen elements */
 }
 
 @font-face {
@@ -52,12 +59,12 @@
 * {
     margin: 0;
     font-family: "Roboto Mono","Arial",sans-serif;
-    color: var(--color-contrast);
+    color: var(--swatch-contrast);
 }
 
 *::selection {
-    background-color: var(--color-highlight);
-    color: var(--color-accent);
+    background-color: var(--swatch-highlight);
+    color: var(--swatch-accent);
 }
 
 picture {
@@ -79,7 +86,7 @@ main {
 }
 
 body.menuActive {
-    background-color: var(--color-contrast);
+    background-color: var(--swatch-contrast);
 }
 
 body.dark.menuActive {
@@ -93,8 +100,13 @@ body.menuActive main {
 /* ---- */
 
 .screen {
+    --background-pattern:
+    linear-gradient(90deg, var(--swatch-background) calc(var(--padding) + 1px), transparent 1%) center,
+    linear-gradient(var(--swatch-background) calc(var(--padding) + 1px), transparent 1%) center, var(--swatch-accent);
+    --background-pattern-size: calc(var(--padding) + 2px) calc(var(--padding) + 2px);
+
     width: 100vw;
-    background-color: var(--color-background);
+    background-color: var(--swatch-background);
     display: flex;
     flex-direction: column;
 }
@@ -108,6 +120,7 @@ body.dark .screen.dark {
 }
 
 .screen .content {
+    position: relative;
     box-sizing: border-box;
     padding: calc(var(--padding) * 1.5);
     padding-top: 0;
@@ -131,13 +144,13 @@ body.dark .screen.dark {
     width: 0; 
     height: 0;
     border: var(--skew) solid transparent;
-    border-top: var(--size) solid var(--color-accent);
+    border-top: var(--size) solid var(--swatch-accent);
 }
 
 .logo::after {
     content: "";
     border: var(--skew) solid transparent;
-    border-top: var(--size) solid rgba(var(--comp-accent),.3);
+    border-top: var(--size) solid rgba(var(--palette-accent),.3);
 }
 
 /* ---- */
@@ -146,6 +159,7 @@ body.dark .screen.dark {
     text-align: center;
     padding: 25px;
     border-radius: var(--border-radius);
+    font-size: clamp(16px,5vw,22px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,24 +167,26 @@ body.dark .screen.dark {
 }
 
 .button.solid {
-    background-color: var(--color-contrast);
-    color: var(--color-background);
+    background-color: var(--swatch-contrast);
+    color: var(--swatch-background);
+    fill: var(--swatch-background);
 }
 
 .button.phantom {
-    background-color: rgba(var(--comp-inverted),.05);
-    color: var(--color-contrast);
+    background-color: rgba(var(--palette-inverted),.05);
+    color: var(--swatch-contrast);
+    fill: var(--swatch-contrast);
 }
 
 .button svg {
     pointer-events: none;
-    fill: var(--color-contrast);
+    fill: inherit;
     transform: scale(1.2);
 }
 
 .button p {
     pointer-events: none;
-    font-size: clamp(16px,5vw,22px);
+    font-size: inherit;
     color: inherit;
 }
 
@@ -215,13 +231,13 @@ header .hamburger {
 header .hamburger div {
     width: 100%;
     height: 2px;
-    background: var(--color-contrast);
-    box-shadow: 0 -10px 0 0 var(--color-contrast), 0 10px 0 0 var(--color-contrast);
+    background: var(--swatch-contrast);
+    box-shadow: 0 -10px 0 0 var(--swatch-contrast), 0 10px 0 0 var(--swatch-contrast);
 }
 
 header .hamburger svg {
     fill: none;
-    stroke: var(--color-contrast);
+    stroke: var(--swatch-contrast);
     stroke-linecap: round;
     stroke-width: 2;
 }
@@ -229,11 +245,15 @@ header .hamburger svg {
 header .spacer {
     width: 1px;
     height: 80%;
-    background-color: rgba(var(--comp-contrast),.2);
+    background-color: rgba(var(--palette-contrast),.2);
 }
 
 .dark header .spacer {
     background-color: black;
+}
+
+body.dark .dark header .spacer {
+    background-color: rgba(var(--palette-contrast),.2);
 }
 
 header .logo {
@@ -244,13 +264,20 @@ header .logo {
 
 /* -- Screen > Landingpage -- */
 
+.screen.landingpage {
+    background: var(--background-pattern);
+    background-size: var(--background-pattern-size);
+}
+
 .screen.landingpage .content {
     padding-bottom: 0;
 }
 
 .screen.landingpage img {
+    position: relative;
     width: clamp(100px,80vw,40vh);
     align-self: flex-end;
+    z-index: 1;
 }
 
 .screen.landingpage .pattern {
@@ -268,7 +295,7 @@ header .logo {
     width: 0;
     height: 0;
     border: solid var(--size) transparent;
-    border-bottom: solid calc(var(--size) * 2) rgba(var(--comp-accent),.1);
+    border-bottom: solid calc(var(--size) * 2) rgba(var(--palette-accent),.1);
     transform-origin: 50% 75%;
     transform: rotate(20deg);
 }
@@ -292,6 +319,50 @@ header .logo {
     margin-top: auto;
 }
 
+/* -- Media queries -- */
+
+/* Wide-screen */
+@media (min-aspect-ratio: 14/9) {
+    /* -- Cornerstones -- */
+
+    header {
+        display: none;
+    }
+
+    main {
+        width: 100vw;
+        flex-direction: row-reverse;
+    }
+
+    /* -- Cornerstones > State overrides -- */
+    
+    body.menuActive {
+        background-color: inherit;
+    }
+
+    body.menuActive main {
+        transform: unset;
+    }
+
+    /* -- Screens -- */
+
+    .screen {
+        width: 50vw;
+        flex-direction: row;
+    }
+
+    body.dark .screen {
+        --swatch-background: black;
+    }
+
+    /* -- Screens > Menu -- */
+
+    .screen.menu .content {
+        padding-top: calc(var(--padding) * 1.5);
+    }
+}
+
+/* Narrow display */
 @media (max-width: 300px) {
     .button svg:not(.hidden) ~ p,
     header .logo {
@@ -299,6 +370,7 @@ header .logo {
     }
 }
 
+/* Super-narrow display */
 @media (max-width: 230px) {
     header {
         justify-content: center;
@@ -307,5 +379,23 @@ header .logo {
     header .spacer,
     header p {
         display: none;
+    }
+}
+
+/* -- Media queries > Media features -- */
+
+@media (pointer: fine) {
+    .button {
+        cursor: pointer;
+    }
+}
+
+@media (any-hover: hover) {
+    .button {
+        transition: var(--transition) background-color;
+    }
+
+    .button.phantom:hover {
+        background-color: rgba(var(--palette-inverted),.2);
     }
 }

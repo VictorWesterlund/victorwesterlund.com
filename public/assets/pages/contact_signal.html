@@ -1,21 +1,21 @@
 <style>
 	body:not(.dark) .modal[data-page="contact_signal"] .inner {
-		--comp-inverted: 255,255,255;
-		--comp-background: 58,118,240;
+		--palette-inverted: 255,255,255;
+		--palette-background: 58,118,240;
 
-		--color-background: rgb(var(--comp-background));
-		--color-inverted: rgb(var(--comp-inverted));
+		--swatch-background: rgb(var(--palette-background));
+		--swatch-inverted: rgb(var(--palette-inverted));
 	}
 
 	body:not(.dark) .modal[data-page="contact_signal"] .button.solid {
-		background-color: var(--color-inverted);
-		color: var(--color-background);
+		background-color: var(--swatch-inverted);
+		color: var(--swatch-background);
 	}
 
 	.modal .inner > h1,
 	.modal .inner > p,
 	.modal .button.phantom {
-		color: var(--color-inverted);
+		color: var(--swatch-inverted);
 	}
 
 	/* ---- */
