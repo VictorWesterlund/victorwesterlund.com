@@ -14,7 +14,7 @@ body .modal.active ~ main .screen {
 }
 
 .modal.active + .modal {
-	z-index: 5;
+	z-index: 10;
 }
 
 /* -- Boilerplate -- */
@@ -154,17 +154,26 @@ body .modal.active ~ main .screen {
 	body .modal {
 		transition: var(--transition);
 		transition-delay: calc(var(--transition) / 2);
-		backdrop-filter: blur(0);
 	}
 	
 	body .modal.active {
 		transition-delay: 1ms;
-		backdrop-filter: blur(10px);
 	}
 
 	/* -- Boilerplate -- */
 
 	.modal.card .inner {
 		align-self: unset;
+	}
+
+	.modal.dialog .inner {
+		width: unset;
+		min-width: 100px;
+		max-width: 50vw;
+	}
+
+	.modal.dialog .button {
+		align-self: unset;
+		width: clamp(100px,100%,500px);
 	}
 }

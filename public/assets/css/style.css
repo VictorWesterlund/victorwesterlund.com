@@ -168,6 +168,14 @@ body.dark .screen.dark {
     gap: var(--padding);
 }
 
+p.button {
+    padding: unset;
+    display: inline;
+    font-size: inherit;
+    color: var(--swatch-accent);
+    text-decoration: underline;
+}
+
 .button.solid {
     background-color: var(--swatch-contrast);
     color: var(--swatch-background);

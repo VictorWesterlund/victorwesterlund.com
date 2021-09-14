@@ -10,6 +10,19 @@ class Modal extends Interaction {
 		let interactions = {
 			close: () => {
 				this.close();
+			},
+			openPage: (event) => {
+				let modal = undefined;
+				switch(event.target.dataset.type) {
+					case "card":
+						modal = new Card({});
+						break;
+					case "dialog":
+					default:
+						modal = new Dialog({});
+						break;
+				}
+				modal.openPage(event.target.dataset.value);
 			}
 		};
 		// Combine template and incoming interactions into one object

@@ -54,12 +54,6 @@ const interactions = {
 					event.target.classList.remove("copied");
 					destroy(copied);
 				},1000);
-			},
-			showPgpKey: () => {
-				module.then(modals => {
-					const dialog = new modals.Dialog();
-					dialog.openPage("contact_email_pgp");
-				});
 			}
 		};
 
