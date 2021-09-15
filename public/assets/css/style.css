@@ -78,6 +78,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background-color: var(--swatch-background);
 }
 
 main {
@@ -168,6 +169,7 @@ body.dark .screen.dark {
     gap: var(--padding);
 }
 
+a.button,
 p.button {
     padding: unset;
     display: inline;
@@ -325,14 +327,14 @@ header .logo {
     flex: 0;
 }
 
-.screen.menu .button[data-action="openContactCard"] {
+.screen.menu .button[data-value="contact"] {
     margin-top: auto;
 }
 
 /* -- Media queries -- */
 
 /* Wide-screen */
-@media (min-aspect-ratio: 14/9) {
+@media (min-aspect-ratio: 14/9) and (min-height: 300px) {
     /* -- Cornerstones -- */
 
     header {
@@ -367,8 +369,71 @@ header .logo {
 
     /* -- Screens > Menu -- */
 
+    body:not(.dark) .screen.menu {
+        /* Component colors */
+        --palette-background: 255,255,255;
+        --palette-inverted: 0,0,0;
+        --palette-contrast: 33,33,33;
+        --palette-accent: 33,33,33;
+
+        /* Compiled colors */
+        --swatch-background: rgb(var(--palette-background));
+        --swatch-inverted: rgb(var(--palette-inverted));
+        --swatch-contrast: rgb(var(--palette-contrast));
+        --swatch-accent: rgb(var(--palette-accent));
+
+        background: var(--background-pattern);
+        background-size: var(--background-pattern-size);
+    }
+
     .screen.menu .content {
         padding-top: calc(var(--padding) * 1.5);
+    }
+
+    .screen.menu .wide {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: clamp(var(--padding),5vw,10vh);
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .screen.menu .wide .group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding);
+    }
+
+    .screen.menu .wide .logo {
+        --size: clamp(20px,3.5vw,10vh);
+    }
+
+    .screen.menu .wide h1 {
+        margin: 0;
+        font-size: clamp(20px,3vw,10vh);
+    }
+
+    .screen.menu .wide p {
+        margin: 0;
+        font-size: clamp(20px,2vw,2vh);
+    }
+
+    .screen.menu .wide nav {
+        display: flex;
+        margin-top: calc(var(--padding) * 2);
+        gap: clamp(var(--padding),3vw,500px);
+    }
+
+    .screen.menu .wide nav p {
+        display: inline-block;
+        padding: var(--padding);
+    }
+
+    .screen.menu .button[data-value="contact"] {
+        display: none;
     }
 }
 

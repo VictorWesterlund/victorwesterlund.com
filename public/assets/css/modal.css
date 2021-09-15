@@ -1,26 +1,36 @@
 /* -- Transition overrides -- */
 
 body main .screen {
-	transition: var(--transition) transform;
+	transition: var(--transition) transform, var(--transition) filter;
 	transition-delay: calc(var(--transition) / 2);
 }
 
+.modal.active + .modal:nth-child(n+2),
 body .modal.active ~ main .screen {
 	transition: var(--transition);
 	transition-delay: 1ms;
 	transform: scale(.95);
-	opacity: .5;
 	pointer-events: none;
+	filter: blur(2px);
 }
 
 .modal.active + .modal {
 	z-index: 10;
 }
 
+.modal:first-child {
+	z-index: 15;
+}
+
+.modal.active + .modal:nth-child(n+2) {
+	filter: blur(2px) brightness(.5);
+	z-index: 5;
+}
+
 /* -- Boilerplate -- */
 
 .modal {
-	transition: var(--transition) background-color;
+	transition: var(--transition) transform, var(--transition) filter;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -29,13 +39,11 @@ body .modal.active ~ main .screen {
 	z-index: 10;
 	pointer-events: none;
 	box-sizing: border-box;
-	background-color: rgba(var(--palette-inverted),0);
 	padding: var(--padding);
 }
 
 .modal.active {
 	pointer-events: all;
-	background-color: rgba(var(--palette-inverted),.4);
 }
 
 .modal .button {
@@ -117,11 +125,11 @@ body .modal.active ~ main .screen {
 
 .modal.card .inner {
 	align-self: flex-end;
-	transform: translateY(1vh);
+	transform: scale(.99) translateY(1vh);
 }
 
 .modal.card.active .inner {
-	transform: translateY(0);
+	transform: scale(1) translateY(0);
 }
 
 .modal.card .button[data-action="close"] {
@@ -141,18 +149,7 @@ body .modal.active ~ main .screen {
 @media (min-aspect-ratio: 14/9) {
 	/* -- Transition overrides -- */
 
-	body main .screen {
-		transition: unset;
-	}
-	
-	body .modal.active ~ main .screen {
-		transition: unset;
-		transform: unset;
-		opacity: unset;
-	}
-
 	body .modal {
-		transition: var(--transition);
 		transition-delay: calc(var(--transition) / 2);
 	}
 	
@@ -164,6 +161,7 @@ body .modal.active ~ main .screen {
 
 	.modal.card .inner {
 		align-self: unset;
+		transform: scale(.99) translateY(10px);
 	}
 
 	.modal.dialog .inner {

@@ -33,7 +33,7 @@ const interactions = {
 		// Remove transition CSS when finished. Wonky resize effects otherwise
 		setTimeout(() => menu.style.removeProperty("transition"),transition + 1);
 	},
-	openContactCard: () => {
+	newCard: (event) => {
 		const module = import("./modules/Modals.mjs");
 		const interactions = {
 			getContact: (event) => {
@@ -59,7 +59,7 @@ const interactions = {
 
 		module.then(modals => {
 			const card = new modals.Card(interactions);
-			card.openPage("contact");
+			card.openPage(event.target.dataset.value);
 		});
 	}
 }
