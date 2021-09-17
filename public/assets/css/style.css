@@ -63,7 +63,7 @@
 }
 
 *::selection {
-    background-color: var(--swatch-highlight);
+    background-color: var(--swatch-contrast);
     color: var(--swatch-accent);
 }
 
@@ -105,7 +105,7 @@ body.menuActive main {
 .screen {
     --background-pattern:
     linear-gradient(90deg, var(--swatch-background) calc(var(--padding) + 1px), transparent 1%) center,
-    linear-gradient(var(--swatch-background) calc(var(--padding) + 1px), transparent 1%) center, var(--swatch-accent);
+    linear-gradient(var(--swatch-background) calc(var(--padding) + 1px), transparent 1%) center, var(--swatch-contrast);
     --background-pattern-size: calc(var(--padding) + 2px) calc(var(--padding) + 2px);
 
     width: 100vw;
@@ -331,12 +331,26 @@ header .logo {
     margin-top: auto;
 }
 
+/* WIP */
+.screen.menu .content > .narrow {
+    align-items: flex-start;
+    max-width: 900px;
+    gap: var(--padding);
+}
+
 /* -- Media queries -- */
+
+@media (max-width: 570px) {
+    .screen.menu .content > .narrow {
+        flex-direction: column;
+    }
+}
 
 /* Wide-screen */
 @media (min-aspect-ratio: 14/9) and (min-height: 300px) {
     /* -- Cornerstones -- */
 
+    .narrow,
     header {
         display: none;
     }
@@ -358,9 +372,12 @@ header .logo {
 
     /* -- Screens -- */
 
-    .screen {
+    .screen.menu,
+    .screen.landingpage {
         width: 50vw;
         flex-direction: row;
+        background: var(--background-pattern);
+        background-size: var(--background-pattern-size);
     }
 
     body.dark .screen {
@@ -381,9 +398,6 @@ header .logo {
         --swatch-inverted: rgb(var(--palette-inverted));
         --swatch-contrast: rgb(var(--palette-contrast));
         --swatch-accent: rgb(var(--palette-accent));
-
-        background: var(--background-pattern);
-        background-size: var(--background-pattern-size);
     }
 
     .screen.menu .content {
@@ -395,7 +409,7 @@ header .logo {
         flex-direction: column;
         justify-content: space-between;
         box-sizing: border-box;
-        padding: clamp(var(--padding),5vw,10vh);
+        padding: clamp(var(--padding),5vw,5vh);
         width: 100%;
         height: 100%;
         overflow-y: auto;
@@ -408,17 +422,23 @@ header .logo {
     }
 
     .screen.menu .wide .logo {
-        --size: clamp(20px,3.5vw,10vh);
+        --size: clamp(20px,3.5vw,5vh);
     }
 
     .screen.menu .wide h1 {
         margin: 0;
-        font-size: clamp(20px,3vw,10vh);
+        font-size: clamp(20px,3vw,5vh);
+    }
+
+    .screen.menu .wide h1 span {
+        background: var(--swatch-contrast);
+        color: var(--swatch-background);
+        padding: 0 var(--padding);
     }
 
     .screen.menu .wide p {
         margin: 0;
-        font-size: clamp(20px,2vw,2vh);
+        font-size: clamp(16px,5vw,2vh);
     }
 
     .screen.menu .wide nav {
