@@ -1,4 +1,4 @@
-// Copyright © Victor Westerlund - No libraries! 😲
+// Victor Westerlund - www.victorwesterlund.com
 
 // Load assets for later use on this page.
 // This implements a hybrid of the link types "preload" and "prefetch"

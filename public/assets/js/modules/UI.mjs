@@ -1,4 +1,4 @@
-// Copyright © Victor Westerlund - No libraries! 😲
+// Victor Westerlund - www.victorwesterlund.com
 
 import { default as Logging } from "./Logging.mjs";
 

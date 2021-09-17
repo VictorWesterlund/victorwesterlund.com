@@ -1,7 +1,6 @@
-// Copyright © Victor Westerlund - No libraries! 😲
+// Victor Westerlund - www.victorwesterlund.com
 import { default as Preload } from "./modules/Preload.mjs";
 import { default as Interaction, destroy } from "./modules/UI.mjs";
-import "./modules/Debugging.mjs";
 
 // Load these assets when the DOM is ready (not needed right away)
 new Preload([

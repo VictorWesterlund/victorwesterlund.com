@@ -1,4 +1,4 @@
-// Copyright © Victor Westerlund - No libraries! 😲
+// Victor Westerlund - www.victorwesterlund.com
 
 class Logging {
 	constructor() {
@@ -21,7 +21,6 @@ class Logging {
 	send() {
 		const send = navigator.sendBeacon(this.endpoint,this.data);
 		if(send !== true) {
-			this.log("mode","fallback");
 			const url = this.endpoint + this.data.toString();
 			fetch(url).catch(response => console.log(response));
 		}
@@ -30,6 +29,6 @@ class Logging {
 
 export default class Log {
 	constructor(value,key = "u") {
-		console.log(key,value);
+		// WIP
 	}
 }

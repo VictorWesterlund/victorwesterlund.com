@@ -1,4 +1,4 @@
-// Copyright © Victor Westerlund - No libraries! 😲
+// Victor Westerlund - www.victorwesterlund.com
 
 import { default as Interaction, destroy } from "./UI.mjs";
 import { Button } from "./Components.mjs";

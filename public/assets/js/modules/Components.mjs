@@ -1,4 +1,4 @@
-// Copyright © Victor Westerlund - No libraries! 😲
+// Victor Westerlund - www.victorwesterlund.com
 
 // UI component constructor
 class Component {
