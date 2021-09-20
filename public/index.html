@@ -1,47 +1,74 @@
 <!DOCTYPE html>
+<!-- Victor Westerlund - www.victorwesterlund.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Victor Westerlund</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Full-stack web developer from Stockholm, Sweden.">
-    <meta name="theme-color" content="#ffffff">
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <title>Victor Westerlund</title>
+
+    <link rel="icon" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <main>
-        <div id="intro">
-            <div class="inner">
-                <div class="block">
+        <div class="screen landingpage">
+            <header>
+                <div class="hamburger center" data-action="toggleMenu" data-theme-color="contrast">
+                    <div></div>
+                </div>
+                <div class="spacer"></div>
+                <div class="logo"></div>
+                <p>victor westerlund</p>
+            </header>
+            <div class="content center">
+                <div class="pattern center">
+                    <div></div>
+                </div>
+                <picture>
+                    <source srcset="assets/img/myface/highres.avif" type="image/avif" media="(min-width: 1920px)">
+                    <source srcset="assets/img/myface/highres.webp" type="image/webp" media="(min-width: 1920px)">
+                    <source srcset="assets/img/myface/mediumres.avif" type="image/avif">
+                    <source srcset="assets/img/myface/mediumres.webp" type="image/webp">
+                    <img src="assets/img/myface/mediumres.png" type="image/png">
+                </picture>
+            </div>
+        </div>
+        <div class="screen menu dark">
+            <header>
+                <div class="hamburger center" data-action="toggleMenu" data-theme-color="background">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28.548" height="22.828"><path d="M2.28 11.414h25.269M1.414 11.414l10-10M1.414 11.414l10 10"/></svg>
+                </div>
+                <div class="spacer"></div>
+                <div class="logo"></div>
+                <p>victor westerlund</p>
+            </header>
+            <div class="content">
+                <div class="wide">
                     <div class="logo"></div>
-                    <h1><span>victor westerlund</span></h1>
-                    <h2><span>full-stack web developer</span></h2>
-                </div>
-                <div class="block">
-                    <p><span>I create things with code. The things I've created for the public reside as open-source repositories on <a href="https://github.com/VictorWesterlund" ping="https://api.victorwesterlund/log/ping/" target="_blank">GitHub</a>, the rest you'll be lucky to hear about some day.</span></p>
-                    <p><span>Other topics (seemingly irrelevant to programming) I find facinating include but is in no way limited to astronomy, psychology, sociology, economics, ...</span></p>
-                    <p><span><strong>hello@victorwesterlund.com</strong></span>&#8203;(<a href="https://storage.googleapis.com/public.victorwesterlund.com/publickey.gpg" ping="https://api.victorwesterlund/log/ping/" target="_blank">PGP&nbsp;Key</a>)</p>
-                </div>
-                <div class="block">
+                    <div class="group">
+                        <h1><span>victor westerlund</span></h1>
+                        <p>I create things with code. The things I've created for the public reside as open-source repositories on GitHub, the rest you might hear about from me some day.</p>
+                        <p>Other topics (seemingly irrelevant to programming) I find facinating include but is in no way limited to astronomy, psychology, sociology, economics, ...</p>
+                    </div>
                     <nav>
-                        <!--<a href="#">contact</a>-->
-                        <a href="https://github.com/VictorWesterlund" ping="https://api.victorwesterlund/log/ping/" target="_blank">github</a>
+                        <p class="button" data-action="newCard" data-value="contact_signal">signal</p>
+                        <p class="button" data-action="newCard" data-value="contact_email">email</p>
+                        <a href="https://github.com/VictorWesterlund" target="_blank"><p class="button">github&nbsp;→</p></a>
                     </nav>
+                </div>
+                <div class="narrow center">
+                    <p>I create things with code. The things I've created for the public reside as open-source repositories on GitHub, the rest you might hear about from me some day.</p>
+                    <p>Other topics (seemingly irrelevant to programming) I find facinating include but is in no way limited to astronomy, psychology, sociology, economics, ...</p>
+                </div>
+                <div class="button phantom" data-action="newCard" data-value="contact">
+                    <p>contact me</p>
                 </div>
             </div>
         </div>
-        <div id="myface">
-            <picture>
-                <source srcset="assets/img/myface/highres.avif" type="image/avif" media="(min-width: 1920px)">
-                <source srcset="assets/img/myface/highres.webp" type="image/webp" media="(min-width: 1920px)">
-                <source srcset="assets/img/myface/mediumres.avif" type="image/avif">
-                <source srcset="assets/img/myface/mediumres.webp" type="image/webp">
-                <img src="assets/img/myface/mediumres.png" type="image/png">
-            </picture>
-        </div>
     </main>
-    <script src="assets/js/script.js" type="module"></script>
-    <script src="assets/js/nomodule.js" nomodule></script>
+    <script type="module" src="assets/js/script.js"></script>
+    <script nomodule src="assets/js/nomodule.js"></script>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!-- Victor Westerlund - www.victorwesterlund.com -->
+<style>
+	.contact {
+		align-self: stretch;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--padding);
+	}
+
+	.contact .item {
+		--size: 1fr;
+		width: var(--size);
+		height: var(--size);
+		border-radius: var(--border-radius);
+		background-color: rgba(var(--palette-inverted),.05);
+		flex-direction: column;
+		justify-content: space-between;
+		box-sizing: border-box;
+		padding: var(--padding);
+	}
+
+	.contact .item * {
+		pointer-events: none;
+	}
+
+	.contact .item img {
+		height: 8vh;
+	}
+
+	@media (max-width: 300px) {
+		.contact {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+<div class="contact">
+	<div class="item button phantom" data-action="getContact" data-value="contact_signal">
+		<img src="assets/img/icons/signal.svg"/>
+		<p>Signal</p>
+	</div>
+	<div class="item button phantom" data-action="getContact" data-value="contact_email">
+		<img src="assets/img/icons/email.svg"/>
+		<p>E-Mail</p>
+	</div>
+</div>
