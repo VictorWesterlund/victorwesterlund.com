@@ -4,71 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Victor Westerlund</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Full-stack web developer from Stockholm, Sweden.">
-
     <link rel="icon" href="assets/img/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <main>
-        <div class="screen landingpage">
-            <header>
-                <div class="hamburger center" data-action="toggleMenu" data-theme-color="contrast">
-                    <div></div>
-                </div>
-                <div class="spacer"></div>
-                <div class="logo"></div>
-                <p>victor westerlund</p>
-            </header>
-            <div class="content center">
-                <div class="pattern center">
-                    <div></div>
-                </div>
-                <picture>
-                    <source srcset="assets/img/myface/highres.avif" type="image/avif" media="(min-width: 1920px)">
-                    <source srcset="assets/img/myface/highres.webp" type="image/webp" media="(min-width: 1920px)">
-                    <source srcset="assets/img/myface/mediumres.avif" type="image/avif">
-                    <source srcset="assets/img/myface/mediumres.webp" type="image/webp">
-                    <img src="assets/img/myface/mediumres.png" type="image/png">
-                </picture>
-            </div>
-        </div>
-        <div class="screen menu dark">
-            <header>
-                <div class="hamburger center" data-action="toggleMenu" data-theme-color="background">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28.548" height="22.828"><path d="M2.28 11.414h25.269M1.414 11.414l10-10M1.414 11.414l10 10"/></svg>
-                </div>
-                <div class="spacer"></div>
-                <div class="logo"></div>
-                <p>victor westerlund</p>
-            </header>
-            <div class="content">
-                <div class="wide">
-                    <div class="logo"></div>
-                    <div class="group">
-                        <h1><span>victor westerlund</span></h1>
-                        <p>I create things with code. The things I've created for the public reside as open-source repositories on GitHub, the rest you might hear about from me some day.</p>
-                        <p>Other topics (seemingly irrelevant to programming) I find facinating include but is in no way limited to astronomy, psychology, sociology, economics, ...</p>
-                    </div>
-                    <nav>
-                        <p class="button" data-action="newCard" data-value="contact_signal">signal</p>
-                        <p class="button" data-action="newCard" data-value="contact_email">email</p>
-                        <a href="https://github.com/VictorWesterlund" target="_blank"><p class="button">github&nbsp;→</p></a>
-                    </nav>
-                </div>
-                <div class="narrow center">
-                    <p>I create things with code. The things I've created for the public reside as open-source repositories on GitHub, the rest you might hear about from me some day.</p>
-                    <p>Other topics (seemingly irrelevant to programming) I find facinating include but is in no way limited to astronomy, psychology, sociology, economics, ...</p>
-                </div>
-                <div class="button phantom" data-action="newCard" data-value="contact">
-                    <p>contact me</p>
-                </div>
-            </div>
-        </div>
+    <main class="hidden">
+        <p>victor westerlund</p>
+        <p><a href="https://github.com/VictorWesterlund">github</a></p>
     </main>
-    <script type="module" src="assets/js/script.js"></script>
-    <script nomodule src="assets/js/nomodule.js"></script>
+    <script>
+        // Compensate for native elements (like the brower navbar)
+        function updateOffset() {
+            const offset = (window.outerHeight - window.innerHeight) / 2;
+            if(offset > -1) {
+                const main = document.getElementsByTagName("main")[0];
+                main.style.setProperty("transform",`translateY(-${offset}px)`);
+            }
+        }
+        window.addEventListener("resize",() => updateOffset());
+        updateOffset();
+    </script>
 </body>
 </html>
