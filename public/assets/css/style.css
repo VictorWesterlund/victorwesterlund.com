@@ -1,4 +1,4 @@
-/* Victor Westerlund */
+/* Victor Westerlund - www.victorwesterlund.com */
 :root {
     --palette-background: 255,255,255;
     --palette-contrast: 33,33,33;
@@ -35,7 +35,7 @@
 
 *::selection {
     background-color: var(--swatch-contrast);
-    color: var(--swatch-accent);
+    color: var(--swatch-background);
 }
 
 html,
@@ -55,16 +55,38 @@ a {
     font-weight: bold;
 }
 
+a::after {
+    content: " →";
+}
+
 main {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    font-size: clamp(18px,5vw,3vh);
+    font-size: 20px;
+    transform: translateY(0);
 }
 
-/* -- Content -- */
-
 /* -- Media Queries -- */
+
+@media (max-width: 300px) {
+    main {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media print {
+    a::after {
+        content: ": " attr(href);
+    }
+}
+
+@media (pointer: fine) {
+    a:hover {
+        background: rgba(var(--palette-contrast),.1);
+    }
+}
 
 @media (prefers-color-scheme: dark) {
     :root {

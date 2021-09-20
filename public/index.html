@@ -10,9 +10,21 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <main>
+    <main class="hidden">
         <p>victor westerlund</p>
-        <a href="https://github.com/VictorWesterlund"><p>github →</p></a>
+        <p><a href="https://github.com/VictorWesterlund">github</a></p>
     </main>
+    <script>
+        // Compensate for native elements (like the brower navbar)
+        function updateOffset() {
+            const offset = (window.outerHeight - window.innerHeight) / 2;
+            if(offset > -1) {
+                const main = document.getElementsByTagName("main")[0];
+                main.style.setProperty("transform",`translateY(-${offset}px)`);
+            }
+        }
+        window.addEventListener("resize",() => updateOffset());
+        updateOffset();
+    </script>
 </body>
 </html>
