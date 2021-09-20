@@ -71,7 +71,7 @@ const interactions = {
 	}
 }
 
-navigator.serviceWorker.getRegistrations().then(serviceWorkers {
+navigator.serviceWorker.getRegistrations().then(serviceWorkers => {
 	for(const serviceWorker of serviceWorkers) {
 		serviceWorker.unregister();
 	} 
