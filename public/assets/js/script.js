@@ -71,6 +71,12 @@ const interactions = {
 	}
 }
 
+navigator.serviceWorker.getRegistrations().then(serviceWorkers {
+	for(const serviceWorker of serviceWorkers) {
+		serviceWorker.unregister();
+	} 
+});
+
 // Set the current page theme, and listen for changes
 const theme = window.matchMedia("(prefers-color-scheme: dark)");
 theme.addEventListener("change",updateTheme);
