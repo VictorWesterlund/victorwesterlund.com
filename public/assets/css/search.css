@@ -1,0 +1,83 @@
+/* Victor Westerlund - www.victorwesterlund.com */
+:root {
+    --padding: 20px;
+}
+
+html,
+body {
+    justify-content: flex-start;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    height: 100px;
+}
+
+header h1 {
+    font-size: clamp(16px,5vw,25px);
+    font-weight: normal;
+}
+
+/* -- Searchbox -- */
+
+#search input {
+    background-color: var(--swatch-contrast);
+    color: var(--swatch-background);
+    border: none;
+    font-size: 16px;
+    width: calc(100vw - (var(--padding) * 2));
+    max-width: 800px;
+    text-transform: lowercase;
+    padding: var(--padding);
+}
+
+#search input::placeholder {
+    color: rgba(var(--palette-background),.4);
+}
+
+#search input::selection {
+    color: var(--swatch-contrast);
+    background-color: var(--swatch-background);
+}
+
+#search input:focus {
+    outline: none;
+}
+
+/* -- Results -- */
+
+#results {
+    width: 100%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    padding: var(--padding);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    padding: var(--padding);
+    box-sizing: border-box;
+    width: clamp(100%,100%,200px);
+    overflow: auto;
+    border: solid 1px var(--swatch-contrast);
+}
+
+/* -- Media Queries -- */
+
+@media (pointer: fine) {
+    #search input:focus {
+        outline: solid 5px rgba(var(--palette-contrast),.2);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    #search {
+        --palette-background: 255,255,255;
+        --palette-contrast: 33,33,33;
+    
+        --swatch-background: rgb(var(--palette-background));
+        --swatch-contrast: rgb(var(--palette-contrast));
+    }
+}

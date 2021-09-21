@@ -1,0 +1,31 @@
+/* Victor Westerlund - www.victorwesterlund.com */
+a {
+    font-weight: bold;
+}
+
+a::after {
+    content: " →";
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 20px;
+    transform: translateY(0);
+}
+
+/* -- Media Queries -- */
+
+@media (max-width: 300px) {
+    main {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media print {
+    a::after {
+        content: ": " attr(href);
+    }
+}

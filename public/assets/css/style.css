@@ -43,6 +43,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -52,35 +53,9 @@ body {
 a {
     display: content;
     text-decoration: none;
-    font-weight: bold;
-}
-
-a::after {
-    content: " →";
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    font-size: 20px;
-    transform: translateY(0);
 }
 
 /* -- Media Queries -- */
-
-@media (max-width: 300px) {
-    main {
-        text-align: center;
-        align-items: center;
-    }
-}
-
-@media print {
-    a::after {
-        content: ": " attr(href);
-    }
-}
 
 @media (pointer: fine) {
     a:hover {
