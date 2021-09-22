@@ -1,6 +1,7 @@
 /* Victor Westerlund - www.victorwesterlund.com */
 :root {
     --padding: 20px;
+    --max-width: 800px;
 }
 
 html,
@@ -12,6 +13,7 @@ header {
     display: flex;
     align-items: center;
     height: 100px;
+    min-height: 80px;
 }
 
 header h1 {
@@ -27,7 +29,7 @@ header h1 {
     border: none;
     font-size: 16px;
     width: calc(100vw - (var(--padding) * 2));
-    max-width: 800px;
+    max-width: var(--max-width);
     text-transform: lowercase;
     padding: var(--padding);
 }
@@ -48,18 +50,20 @@ header h1 {
 /* -- Results -- */
 
 #results {
-    width: 100%;
-    max-width: 1000px;
+    width: calc(var(--max-width) + (var(--padding) * 4));
+    max-width: 100%;
     box-sizing: border-box;
     padding: var(--padding);
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: var(--padding);
 }
 
 .card {
     padding: var(--padding);
     box-sizing: border-box;
-    width: clamp(100%,100%,200px);
+    width: 100%;
     overflow: auto;
     border: solid 1px var(--swatch-contrast);
 }
