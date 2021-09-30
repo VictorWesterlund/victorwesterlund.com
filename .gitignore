@@ -1,4 +1,10 @@
+# victorwesterlund.com #
+########################
 .well-known/
+/content
+
+# Bootstrapping #
+#################
 /node_modules
 /public/hot
 /public/storage
