@@ -5,36 +5,76 @@ export default class Search {
 		this.endpoint = new URL("api/search",window.location.href);
 
 		this.lastQuery = "";
-		this.timeout = null;
+		this.throttle = null;
 
-		this.results = {
-			element: results,
-			set content(html) {
-				this.results?.insertAdjacentHTML("beforeend",html);
-			}
-		};
-		input?.addEventListener("keydown",event => this.keyEvent(event)) ?? false;
+		this.results = results;
+		this.input = input;
+		this.input?.addEventListener("keyup",event => this.keyEvent(event)) ?? false;
+	}
+
+	clearResults() {
+		while(this.results.firstChild) {
+			this.results.removeChild(this.results.lastChild);
+		}
+	}
+
+	output(html) {
+		this.clearResults();
+		if(typeof html === "string") {
+			this.results.insertAdjacentHTML("beforeEnd",html);
+			return;
+		}
+		this.results.appendChild(html);
+	}
+
+	status(text,classList = false) {
+		const element = document.createElement("p");
+		if(classList !== false) {
+			element.classList = classList;
+		}
+
+		element.innerText = text;
+		this.output(element);
 	}
 
 	async search(query) {
 		const url = new URL(this.endpoint);
 		url.searchParams.set("q",query);
 
-		const timeout = setTimeout(() => this.showSpinner(),1000);
-		const api = await fetch(url);
-		
-		return result;
+		const timeout = new Promise(reject => setTimeout(() => reject("Request timed out"),3000));
+		const api = fetch(url);
+
+		const result = Promise.race([api,timeout]);
+		result.then(response => {
+			if(!response.ok) {
+				this.status("something went wrong on my side","error");
+				console.error("Response from server:",response);
+				return;
+			}
+			this.output(response.text);
+		});
+		result.catch(error => this.status(error,"error"));
 	}
 
+	// Wait until the user stops typing for a few miliseconds
 	queue(query) {
-		clearTimeout(this.timeout);
-		this.timeout = setTimeout(() => this.search(query),500);
+		clearTimeout(this.throttle);
+		this.throttle = setTimeout(() => this.search(query),500);
 	}
 
 	async keyEvent(event) {
-		if(event.target.value === this.lastQuery) {
+		const query = event.target.value;
+		if(query.length < 1) {
+			this.status("search results will appear here as you type");
+			return;
+		}
+
+		if(query === this.lastQuery) {
 			return false;
 		}
-		this.queue(event.target.value);
+
+		this.lastQuery = query;
+		this.status("searching..");
+		this.queue(query);
 	}
 }

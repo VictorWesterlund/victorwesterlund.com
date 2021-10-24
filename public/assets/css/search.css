@@ -60,6 +60,19 @@ header h1 {
     gap: var(--padding);
 }
 
+#results > p {
+    text-align: center;
+}
+
+#results > p.error {
+    color: red;
+}
+
+#results > p.error::before {
+    content: "oh crap, ";
+    font-weight: bold;
+}
+
 .card {
     --padding-multiplier: 1.2;
     flex: none;
@@ -129,6 +142,30 @@ header h1 {
 @media (pointer: fine) {
     #search input:focus {
         outline: solid 5px rgba(var(--palette-contrast),.2);
+    }
+
+    /* ---- */
+
+    #results::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    #results::-webkit-scrollbar-track {
+        background-color: rgba(var(--palette-contrast),.04);
+    }
+    
+    #results::-webkit-scrollbar-thumb {
+        background: var(--swatch-contrast);
+    }
+
+    #results::-webkit-scrollbar-thumb:hover {
+        background: var(--swatch-background);
+        outline: solid 2px rgba(var(--palette-contrast),1);
+    }
+
+    #results::-webkit-scrollbar-thumb:active {
+        background: rgba(var(--palette-contrast),.1);
+        outline: solid 2px rgba(var(--palette-contrast),1);
     }
 }
 
