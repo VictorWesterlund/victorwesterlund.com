@@ -42,18 +42,22 @@ export default class Search {
 		url.searchParams.set("q",query);
 
 		const timeout = new Promise(reject => setTimeout(() => reject("Request timed out"),3000));
-		const api = fetch(url);
+		const api = fetch(url,{
+			headers: {
+				"Content-Type": "text/html"
+			}
+		});
 
 		const result = Promise.race([api,timeout]);
 		result.then(response => {
 			if(!response.ok) {
-				this.status("something went wrong on my side","error");
 				console.error("Response from server:",response);
-				return;
+				throw new Error("Invalid response from server");
 			}
-			this.output(response.text);
-		});
-		result.catch(error => this.status(error,"error"));
+			return response.text();
+		})
+		.then(html => this.output(html))
+		.catch(error => this.status(error,"error"));
 	}
 
 	// Wait until the user stops typing for a few miliseconds
@@ -62,9 +66,10 @@ export default class Search {
 		this.throttle = setTimeout(() => this.search(query),500);
 	}
 
-	async keyEvent(event) {
+	keyEvent(event) {
 		const query = event.target.value;
 		if(query.length < 1) {
+			this.lastQuery = "";
 			this.status("search results will appear here as you type");
 			return;
 		}

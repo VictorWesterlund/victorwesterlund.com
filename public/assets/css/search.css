@@ -69,8 +69,7 @@ header h1 {
 }
 
 #results > p.error::before {
-    content: "oh crap, ";
-    font-weight: bold;
+    content: "😰 ";
 }
 
 .card {
