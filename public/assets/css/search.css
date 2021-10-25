@@ -103,6 +103,35 @@ header h1 {
     word-break: break-word;
 }
 
+/* -- Results > Types -- */
+
+.card.error {
+    gap: unset;
+}
+
+.card.error p > a {
+    background-color: rgba(var(--palette-contrast),.1);
+}
+
+.resultsFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resultsFooter svg {
+    width: 41px;
+    height: 40px;
+}
+
+.resultsFooter svg polygon {
+    fill: none;
+    stroke: var(--swatch-contrast);
+    stroke-width: 1px;
+}
+
+/* ---- */
+
 .button {
     padding: var(--padding);
     text-align: center;
@@ -134,6 +163,13 @@ header h1 {
     .button:active {
         background-color: rgba(var(--palette-contrast),.1);
         color: var(--swatch-contrast);
+        cursor: pointer;
+    }
+
+    /* ---- */
+
+    .resultsFooter svg:hover polygon {
+        fill: var(--swatch-contrast);
         cursor: pointer;
     }
 }

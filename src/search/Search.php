@@ -7,22 +7,38 @@
 		public function __construct() {
 			$this->query = $query;
 
-			switch($_SERVER["HTTP_CONTENT_TYPE"]) {
+			$mime_type = $_SERVER["HTTP_CONTENT_TYPE"] ? $_SERVER["HTTP_CONTENT_TYPE"] : $_GET["f"];
+			switch($mime_type) {
+				case "html":
 				case "text/html": 
 					$this->get_html(); 
 					break;
 
 				default:
+				case "json":
 				case "application/json":
 					$this->get_json();
 					break;
 			}
 		}
 
+		private function get_html_template($name) {
+			$path = dirname(__FILE__,1)."/templates/${name}.html";
+			if(!is_file($path)) {
+				return $this->get_html_template("card_error_display");
+			}
+			$html = Import::file($path);
+			return $html;
+		}
+
 		private function get_html() {
-			header("Content-Type: text/html");
-			$template = Import::file("templates/default.html");
-			echo $template;
+			$results = [
+				$this->get_html_template("card_default"),
+				$this->get_html_template("defaults"),
+				$this->get_html_template("card_default"),
+				$this->get_html_template("result_about")
+			];
+			echo implode("",$results);
 		}
 
 		private function get_json() {
