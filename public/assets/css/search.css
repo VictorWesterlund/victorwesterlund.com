@@ -119,15 +119,30 @@ header h1 {
     align-items: center;
 }
 
+.resultsFooter p {
+    text-align: center;
+    padding: 0 var(--padding);
+}
+
+.resultsFooter p span:last-child {
+    display: none;
+}
+
 .resultsFooter svg {
     width: 41px;
     height: 40px;
+    flex: none;
 }
 
 .resultsFooter svg polygon {
     fill: none;
-    stroke: var(--swatch-contrast);
+    stroke: rgba(var(--palette-contrast),.1);
     stroke-width: 1px;
+}
+
+.resultsFooter svg.active polygon {
+    fill: var(--swatch-contrast);
+    stroke: var(--swatch-contrast);
 }
 
 /* ---- */
@@ -153,6 +168,12 @@ header h1 {
     }
 }
 
+@media (min-width: 600px) {
+    .resultsFooter p span:last-child {
+        display: initial;
+    }
+}
+
 @media (hover: hover) {
     .button:hover {
         background-color: rgba(var(--palette-contrast),0);
@@ -168,9 +189,13 @@ header h1 {
 
     /* ---- */
 
-    .resultsFooter svg:hover polygon {
-        fill: var(--swatch-contrast);
+    .resultsFooter svg.active:hover polygon {
+        fill: var(--swatch-background);
         cursor: pointer;
+    }
+
+    .resultsFooter svg.active:active polygon {
+        fill: rgba(var(--palette-contrast),.1);
     }
 }
 
