@@ -9,7 +9,7 @@
 			$config = Import::json($config_path);
 
 			parent::__construct();
-			$this->ssl_set();
+			//$this->ssl_set();
 
 			// Attempt to connect to MySQL servers in order (moving to the next on failure)
 			foreach($config->servers as $server) {
@@ -20,15 +20,26 @@
 			}
 		}
 
-		protected function get_rows() {
+		// Exit with error code
+		private function error($message) {
+			http_response_code(500);
+			header("Content-Type: application/json");
+			$output = json_encode([
+				"error" => $message
+			]);
+			die($output);
+		}
+
+		// Return affected rows as an array of arrays
+		protected function get_rows($sql) {
 			if(!$this->ping()) {
-				return ["error" => "NO_DB"];
+				$this->error("No database connected");
 			}
 
 			$query = $this->query($sql);
 			
 			$rows = [];
-			foreach($query->fetch_row() as $row) {
+			while($row = $query->fetch_row()) {
 				$rows[] = $row;
 			}
 			return $rows;
