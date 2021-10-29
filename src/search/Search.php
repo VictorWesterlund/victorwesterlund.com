@@ -27,7 +27,7 @@
 
 		// Perform a seach on the given query and return the results as an array
 		private function get_results() {
-			$sql = "SELECT template,title,content,href FROM `search` WHERE `title` LIKE '%{$this->query}%'";
+			$sql = "SELECT template,title,content,href FROM `search` WHERE `title` LIKE '%{$this->query}%' OR `content` LIKE '%{$this->query}%'";
 			$rows = $this->get_rows($sql);
 			return $rows;
 		}
@@ -47,7 +47,7 @@
 			$results = $this->get_results();
 			
 			if(count($results) < 1) {
-				$results[] = ["message","info","no results :("];
+				$results[] = ["message","info","no results 😞"];
 			}
 
 			// Load HTML and format each response from template
