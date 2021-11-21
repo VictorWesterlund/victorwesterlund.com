@@ -1,0 +1,59 @@
+/* Victor Westerlund - www.victorwesterlund.com */
+html,
+body {
+    justify-content: flex-start;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    --stroke: 1px;
+    --max-width: 700px;
+    --min-width: calc(100% - ((var(--padding) + var(--stroke)) * 2));
+    align-items: center;
+    width: var(--min-width);
+    max-width: var(--max-width);
+}
+
+main > div:not(.button) {
+    border: solid var(--stroke) var(--swatch-contrast);
+    padding: var(--padding);
+    gap: var(--padding);
+}
+
+main .button {
+    background-color: var(--swatch-contrast);
+    color: var(--swatch-background);
+    text-align: center;
+    padding: var(--padding);
+    width: var(--min-width);
+    max-width: calc(var(--max-width) / 2);
+    margin: var(--padding);
+    user-select: none;
+}
+
+/* -- Media Queries -- */
+
+@media (min-width: 600px) {
+    main {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+@media (hover: hover) {
+    .button:hover {
+        background-color: rgba(var(--palette-contrast),.1);
+        color: var(--swatch-contrast);
+        cursor: pointer;
+    }
+
+    .button:active {
+        background-color: rgba(var(--palette-contrast),.3);
+        color: var(--swatch-contrast);
+        cursor: pointer;
+    }
+}

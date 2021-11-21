@@ -1,25 +1,7 @@
 /* Victor Westerlund - www.victorwesterlund.com */
-:root {
-    --padding: 20px;
-    --max-width: 800px;
-}
-
 html,
 body {
     justify-content: flex-start;
-}
-
-header {
-    display: flex;
-    align-items: center;
-    height: 100px;
-    min-height: 80px;
-    flex: none;
-}
-
-header h1 {
-    font-size: clamp(16px,5vw,25px);
-    font-weight: normal;
 }
 
 /* -- Searchbox -- */
