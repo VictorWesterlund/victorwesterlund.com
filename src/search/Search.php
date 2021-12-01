@@ -1,6 +1,6 @@
 <?php
 
-	require_once dirname(__DIR__,1)."/Globals.php";
+	require_once dirname(__DIR__,1)."/core/Import.php";
 	require_once dirname(__DIR__,1)."/database/Database.php";
 
 	class Search extends Database {

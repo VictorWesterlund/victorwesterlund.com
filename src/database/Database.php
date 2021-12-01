@@ -1,6 +1,6 @@
 <?php
 
-	include_once dirname(__DIR__,1)."/Globals.php";
+	include_once dirname(__DIR__,1)."/core/Import.php";
 
 	class Database extends mysqli {
 		public function __construct($table) {

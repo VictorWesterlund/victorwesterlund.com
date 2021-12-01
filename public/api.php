@@ -1,7 +1,5 @@
 <?php
 
-	require_once dirname(__DIR__,1)."/src/Globals.php";
-
 	class APIRouter {
 		public function __construct($path) {
 			// List of implemented API services
