@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<!-- Victor Westerlund - www.victorwesterlund.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Victor Westerlund</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Full-stack web developer from Stockholm, Sweden.">
-    <link rel="icon" href="assets/img/favicon.png">
+    <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:no-preference)">
+    <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
+    <link rel="icon" href="assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <style>body { grid-template-rows: 1fr calc(var(--running-height) / var(--footer-denom)); }</style>
 </head>
 <body>
-    <main class="hidden">
+    <main>
         <p>victor westerlund</p>
-        <p><a href="https://github.com/VictorWesterlund">github</a></p>
-        <!--<p><a href="search">search</a></p>-->
+        <p><a class="arrow" href="https://github.com/VictorWesterlund">github</a></p>
+        <p><a class="arrow" href="contact">contact</a></p>
     </main>
+    <footer>
+        <p><a href="about">about</a></p>
+        <p><a href="search">search</a></p>
+        <p><a class="arrow" href="more">more</a></p>
+    </footer>
 </body>
 </html>

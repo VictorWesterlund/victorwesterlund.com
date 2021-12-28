@@ -1,73 +1,142 @@
-/* Victor Westerlund - www.victorwesterlund.com */
 :root {
-    --palette-background: 255,255,255;
-    --palette-contrast: 33,33,33;
+    --color-background: 255,255,255;
+    --color-contrast: 33,33,33;
 
-    --swatch-background: rgb(var(--palette-background));
-    --swatch-contrast: rgb(var(--palette-contrast));
-}
-
-@font-face {
-    font-family: "Roboto Mono";
-    font-weight: normal;
-    font-style: normal;
-    src: local("Roboto Mono Regular"), local("RobotoMono-Regular"),
-         url("../fonts/RobotoMono-Regular.woff2") format("woff2"),
-         url("../fonts/RobotoMono-Regular.woff") format("woff");
-}
-
-@font-face {
-    font-family: "Roboto Mono";
-    font-weight: bold;
-    font-style: normal;
-    src: local("Roboto Mono Bold"), local("RobotoMono-Bold"),
-         url("../fonts/RobotoMono-Bold.woff2") format("woff2"),
-         url("../fonts/RobotoMono-Bold.woff") format("woff");
+    --padding: 20px;
+    --running-height: 100px;
+    --footer-denom: 1;
 }
 
 /* -- Cornerstones -- */
 
 * {
     margin: 0;
-    font-family: "Roboto Mono","Arial",sans-serif;
-    color: var(--swatch-contrast);
+    font-family: "Monaco","Consolas",monospace,sans-serif;
+    color: rgb(var(--color-contrast));
 }
 
 *::selection {
-    background-color: var(--swatch-contrast);
-    color: var(--swatch-background);
+    background-color: rgb(var(--color-contrast));
+    color: rgb(var(--color-background));
 }
 
 html,
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    background-color: var(--swatch-background);
+    overflow-x: hidden;
+}
+
+body {
+    display: grid;
+    grid-template-rows: var(--running-height) 1fr calc(var(--running-height) / var(--footer-denom));
+    background-color: rgb(var(--color-background));
+    place-items: center;
+    justify-items: center;
+    font-size: 21px;
+}
+
+body > * {
+    box-sizing: border-box;
+}
+
+p,
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
 a {
-    text-decoration: none;
+    display: contents;
+}
+
+/* -- Components -- */
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding,30px);
+}
+
+.arrow {
+    display: inline;
+    font-weight: bold;
+}
+
+.arrow::after {
+    content: " →";
+}
+
+footer {
+    justify-self: end;
+    padding: 0 calc(var(--running-height) / (var(--footer-denom) * 2));
+}
+
+footer p:not(:last-child) {
+    display: none;
 }
 
 /* -- Media Queries -- */
 
-@media (pointer: fine) {
-    a:hover {
-        background: rgba(var(--palette-contrast),.1);
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: 0,0,0;
+        --color-contrast: 255,255,255;
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --palette-background: 0,0,0;
-        --palette-contrast: 255,255,255;
+@media (pointer: fine) {
+    a:hover {
+        background: rgba(var(--color-contrast),.1);
+    }
+}
 
-        --swatch-background: rgb(var(--palette-background));
-        --swatch-contrast: rgb(var(--palette-contrast));
+@media print {
+    .arrow::after {
+        content: ": " attr(href);
+    }
+}
+
+@media (max-width: 300px) {
+    body > * {
+        justify-self: center;
+        text-align: center;
+    }
+}
+
+@media (min-aspect-ratio: 14/9) and (min-height: 500px) {
+    :root {
+        --footer-denom: 2;
+    }
+
+    footer {
+        width: 100%;
+        height: 100%;
+        gap: calc(var(--padding) * 1.5);
+        font-size: 19px;
+        color: rgb(var(--color-background));
+        background-color: rgb(var(--color-contrast));
+        display: flex;
+        align-items: center;
+    }
+
+    footer p:not(:last-child) {
+        display: initial;
+    }
+
+    footer p:last-child {
+        margin-left: auto;
+    }
+
+    footer p:first-child:last-child {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-aspect-ratio: 14/9) and (min-height: 500px) and (prefers-color-scheme: dark) {
+    footer {
+        color: rgb(var(--color-contrast));
+        background-color: rgba(var(--color-contrast),.15);
     }
 }

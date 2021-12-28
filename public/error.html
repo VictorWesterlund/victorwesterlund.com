@@ -2,34 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Victor Westerlund - Search</title>
+    <title>Victor Westerlund</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Full-stack web developer from Stockholm, Sweden.">
-    <meta name="google" content="nositelinkssearchbox">
     <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:no-preference)">
     <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
     <link rel="icon" href="assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/search.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <style>
+        main { align-items: center; gap: unset; }
+        h1 { font-size: clamp(25px,40px,3vw); }
+        .button { margin-top: calc(var(--padding) * 2); }
+        footer { background-color: transparent; }
+    </style>
 </head>
 <body>
     <header>
         <p><a href="/">victor westerlund</a></p>
     </header>
     <main>
-        <div id="search">
-            <input type="search" spellcheck="false" autocomplete="false" placeholder="start typing to search..">
-        </div>
-        <div id="results">
-            <p>search results will appear here as you type</p>
-        </div>
+        <h1>there is nothing here</h1>
+        <p>and that is all I know</p>
+        <a href="#">
+            <div class="button">
+                <p>take me home</p>
+            </div>
+        </a>
     </main>
     <footer>
-        <p><a href="about">about</a></p>
-        <p><a href="search">search</a></p>
-        <p><a class="arrow" href="more">more</a></p>
+        <p>404 not found</p>
     </footer>
-    <script type="module" src="assets/js/search.mjs"></script>
-    <script nomodule defer src="assets/js/noscript.js"></script>
 </body>
 </html>
