@@ -16,7 +16,7 @@ input[type="search"] {
     height: 100%;
     font-size: 18px;
     color: inherit;
-    padding: 0 calc(var(--padding) * 2);
+    padding: 0 calc(var(--padding) * 1.5);
     background-color: transparent;
     border: none;
     outline: none;
@@ -29,6 +29,14 @@ input[type="search"]::selection {
 
 input[type="search"]::placeholder {
     color: rgba(var(--color-background),.4);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 32px;
+    width: 32px;
+    background: center no-repeat rgba(var(--color-background),.1) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAAXNSR0IArs4c6QAAAFRJREFUeNrlkrkNADEIBK8JunD/GVW4oLnMAViagNBkLDsS3/d4sEiiqUGy7kACmyj2DeQRavEgTRGkZ4oUuyPF7ojYBRi35ENP1+qHG7+GP9/b8QPsDLZNvX0megAAAABJRU5ErkJggg==');
+    cursor: pointer;
 }
 
 #results {
