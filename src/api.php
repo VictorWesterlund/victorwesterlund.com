@@ -5,7 +5,7 @@
 			// List of implemented API services
 			$this->services = [
 				"search" => function() {
-					require_once dirname(__DIR__,1)."/src/search/Search.php";
+					require_once "/search/Search.php";
 					new Search();
 				}
 			];

@@ -8,9 +8,9 @@
 <ol>
   <li><strong>Clone this repo.</strong><br><pre>git clone https://github.com/VictorWesterlund/victorwesterlund.com /var/www</pre></li>
   <li><strong>Expose the directory <code>/public</code> to the web.</strong><br>This can be done in multiple ways, but an <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location">NGINX <code>location</code> block</a> or symlink should do the trick.</li>
-  <li><strong>Rewrite <code>api.php</code> to <code>api/*</code>.</strong><br>All requests to <code>example.com/api/*</code> should be routed to the PHP file at <code>/public/api.php</code>.<br>Just like the previous step, this can be done in multiple ways. Here is one way with an NGINX location block:<br>
+  <li><strong>Rewrite <code>api.php</code> to <code>api/*</code>.</strong><br>All requests to <code>example.com/api/*</code> should be routed to the PHP file at <code>/src/api.php</code>.<br>Just like the previous step, this can be done in multiple ways. Here is one way with an NGINX location block:<br>
 <pre>location ~ /api/* {
-     try_files /public/api.php =503;
+     try_files /src/api.php =503;
      include snippets/fastcgi-php.local.conf;
      fastcgi_pass unix:/run/php/php8.0-fpm.sock;
 }</pre></li>
