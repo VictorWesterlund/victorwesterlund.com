@@ -8,30 +8,21 @@
     <link rel="icon" href="/assets/media/favicon-dark.png" media="(prefers-color-scheme:no-preference)">
     <link rel="icon" href="/assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
     <link rel="icon" href="/assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/components.css">
     <style>
-        main { align-items: center; gap: unset; }
-        h1 { font-size: clamp(25px,40px,3vw); }
-        .button { margin-top: calc(var(--padding) * 2); }
-        footer { background-color: transparent; }
+        html, body { margin: 30px; font-family: monospace; color: black; }
+        span { background: black; color: white; }
+        @media (prefers-color-scheme: dark) {
+            html, body, a { background: black; color: white; }
+            span { background: white; color: black; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <p><a href="/">victor westerlund</a></p>
-    </header>
-    <main>
-        <h1>there is nothing here</h1>
-        <p>and that is all I know</p>
-        <a href="/">
-            <div class="button">
-                <p>take me home</p>
-            </div>
-        </a>
-    </main>
+    <h1>there is nothing here</h1>
+    <p>and that is all I know</p>
+    <a href="/"><h2>take me home</h2></a>
     <footer>
-        <p>404 not found</p>
+        <span>victorwesterlund.com</span>
     </footer>
 </body>
 </html>
