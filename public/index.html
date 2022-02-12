@@ -9,18 +9,25 @@
     <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
     <link rel="icon" href="assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>body { grid-template-rows: 1fr calc(var(--running-height) / var(--footer-denom)); }</style>
 </head>
 <body>
-    <main>
-        <p>victor westerlund</p>
-        <p><a class="arrow" href="https://github.com/VictorWesterlund">github</a></p>
-        <p><a class="arrow" href="contact">contact</a></p>
-    </main>
-    <footer>
-        <p><a href="about">about</a></p>
-        <p><a href="search">search</a></p>
-        <p><a class="arrow" href="more">more</a></p>
-    </footer>
+    <div>
+        <div>
+            <p>hello, my name is</p>
+            <h1>victor</h1>
+            <p>I'm a</p>
+            <h1>full-stack</h1>
+            <h1>developer</h1>
+            <p>from Sweden</p>
+            <a href="#">contact me</a>
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <script type="module">
+        import { default as Glitch } from "./assets/js/modules/Glitch.mjs";
+        fetch("assets/media/bg64.txt").then((resp) => resp.text().then(bg64 => new Glitch(bg64, document.body)));
+    </script>
 </body>
 </html>
