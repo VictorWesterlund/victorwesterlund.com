@@ -8,7 +8,7 @@ export default class Background {
 		this.image = null;
 		this.target = target ? target : document.body;
 
-		this.updateBg = setInterval(() => this.randBg(), 2000);
+		this.updateBg = setInterval(() => this.randBg(), 5000);
 	}
 
 	// Update the target CSS background

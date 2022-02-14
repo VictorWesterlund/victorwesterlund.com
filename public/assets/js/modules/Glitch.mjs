@@ -32,6 +32,6 @@ export default class Glitch extends Background {
 	glitch() {
 		const image = this.image.replaceAll(this.randStr(), this.randStr());
 		this.setBg(image);
-		this.interval.next = this.randInt(100, 3500);
+		this.interval.next = this.randInt(1500, 5000);
 	}
 }
