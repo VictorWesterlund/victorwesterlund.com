@@ -10,12 +10,17 @@ export default class Glitch extends Background {
 			// Queue the next glitch
 			set next (timeout) {
 				clearTimeout(this._interval);
-				this._interval = setTimeout(() => this._this.glitch(), timeout);
+				if(timeout !== false) this._interval = setTimeout(() => this._this.glitch(), timeout);
 			}
 		}
 
-		this.interval.next = 500;
-		this.randBg();
+		// Stop playback when page is not visible
+		document.addEventListener("visibilitychange",() => {
+			if(document.visibilityState === "visible") return this.start();
+			this.stop();
+		});
+
+		this.start();
 	}
 
 	// Generate random string of length from charset
@@ -28,10 +33,23 @@ export default class Glitch extends Background {
 		return output;
 	}
 
-	// Create a glitchy image
+	// Create a glitchy image and queue the next one
 	glitch() {
+		if(!this.image) return;
 		const image = this.image.replaceAll(this.randStr(), this.randStr());
 		this.setBg(image);
+		
 		this.interval.next = this.randInt(1500, 5000);
+	}
+
+	start() {
+		this.interval.next = 500;
+		this.updateBg.running = true;
+		this.randBg();
+	}
+
+	stop() {
+		this.interval.next = false;
+		this.updateBg.running = false;
 	}
 }

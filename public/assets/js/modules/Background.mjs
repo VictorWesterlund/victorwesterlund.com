@@ -5,10 +5,22 @@ export default class Background {
 			count: 2
 		}
 
-		this.image = null;
-		this.target = target ? target : document.body;
+		this.image = null; // Will contain the original base64 image
+		this.target = target ? target : document.body; // Set `background-image` of this element
 
-		this.updateBg = setInterval(() => this.randBg(), 5000);
+		// Update the background with a new image every now and then
+		this.updateBg = {
+			_this: this,
+			_delay: 5000,
+			_interval: null,
+			set running (state = true) {
+				clearInterval(this._interval);
+				if(state) this._interval = setInterval(() => this._this.randBg(), this._delay);
+			},
+			set delay (delay) {
+				this._delay = delay;
+			}
+		}
 	}
 
 	// Update the target CSS background
