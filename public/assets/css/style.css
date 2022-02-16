@@ -6,7 +6,7 @@
 
     --font-min: 30px;
     --font-tar: 10vw;
-    --font-max: 4vh;
+    --font-max: 3vh;
 }
 
 /* -- Cornerstones -- */
@@ -73,7 +73,7 @@ body > div {
 
 #intro {
     --font-tar: 13vw;
-    --font-max: 6vh;
+    --font-max: 5vh;
     padding: calc(var(--padding) / 2);
 }
 
@@ -109,6 +109,7 @@ body > div {
     padding-top: calc(var(--portrait-size) - (var(--padding) / 2));
     border-radius: 18px;
     backdrop-filter: saturate(100) brightness(.3);
+    -webkit-backdrop-filter: saturate(100) brightness(.3);
     box-shadow:  0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
 }
 
@@ -134,7 +135,7 @@ body > div {
 
 /* -- Media Queries -- */
 
-@supports ((not (backdrop-filter: saturate)) and (not (backdrop-filter: brightness))) or ((not (-webkit-backdrop-filter: saturate)) and (not (-webkit-backdrop-filter: brightness))) {
+@supports ((backdrop-filter: saturate) and (backdrop-filter: brightness)) or ((-webkit-backdrop-filter: saturate) and (-webkit-backdrop-filter: brightness)) {
     #card {
         background-color: rgba(var(--color-base), .7);
     }
