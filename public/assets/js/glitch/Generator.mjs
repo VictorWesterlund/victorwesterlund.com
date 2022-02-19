@@ -16,7 +16,14 @@ class Generator {
 			// Get or set the path to where base64 images are stored
 			get dir () { return this._dir; },
 			set dir (newPath) {
-				this._dir = newPath + this._dir_rel;
+				const url = new URL(newPath);
+
+				// Replace pathname of this file with relative path to assets
+				const path = url.pathname.split("/");
+				path[path.length - 1] = this._dir_rel;
+
+				url.pathname = path.join("/");
+				this._dir = url.toString();
 			}
 		}
 	}

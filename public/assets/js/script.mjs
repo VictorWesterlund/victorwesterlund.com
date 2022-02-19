@@ -11,4 +11,4 @@ for(let link of document.getElementsByTagName("a")) {
     });
 }
 
-window.glitch = new Glitch(document.body);
+window.glitch = new Glitch(document.body.parentElement);
