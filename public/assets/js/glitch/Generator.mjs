@@ -6,7 +6,7 @@ class Generator {
 			_image: null,
 			_dir: location,
 			_dir_rel: "assets/media/b64/",
-			count: 3,
+			count: 4,
 			// Get or set current background
 			get current () { return this._image; },
 			set current (image) {

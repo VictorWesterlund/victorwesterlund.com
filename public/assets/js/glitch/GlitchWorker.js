@@ -16,10 +16,6 @@ class GlitchWorker extends Generator {
 		self.postMessage("READY");
 	}
 
-	test() {
-		console.log("yes");
-	}
-
 	// Run a scoped function on a random interval between
 	queue(func) {
 		clearTimeout(this._timers[func]);
@@ -27,6 +23,16 @@ class GlitchWorker extends Generator {
 		this._timers[func] = setTimeout(() => this.queue(func), next);
 
 		this[func]?.();
+	}
+
+	// Set background by id and stop randBg animation
+	async forceBg(id) {
+		clearTimeout(this._timers.randBg);
+
+		const image = await this.fetchBg(id);
+		this.bg.current = image;
+
+		this.setBg(image);
 	}
 
 	// Event handler for messages from parent thread

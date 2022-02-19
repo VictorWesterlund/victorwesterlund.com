@@ -26,7 +26,18 @@ body {
     background-color: rgba(var(--color-base), .7);
     background-size: cover;
     background-blend-mode: overlay;
-    background-position: fixed;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+html {
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    overflow-y: scroll;
+    height: 100vh;
 }
 
 picture {
@@ -155,7 +166,7 @@ body > div {
     }
 }
 
-@media (min-aspect-ratio: 14/9) and (min-height: 450px) {
+@media (min-aspect-ratio: 14/9) and (min-height: 600px) {
     body {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
