@@ -9,5 +9,5 @@ assignees: ''
 
 > Replace with description
 
-Category|Score before fix|Score after fix
---|--|--
+Device|Category|Score before fix|Score after fix
+--|--|--|--
