@@ -138,7 +138,7 @@ body > div {
 
 /* -- Media Queries -- */
 
-@supports ((backdrop-filter: saturate) and (backdrop-filter: brightness)) or ((-webkit-backdrop-filter: saturate) and (-webkit-backdrop-filter: brightness)) {
+@supports ((not ((backdrop-filter: saturate(1)) and (backdrop-filter: brightness(1)))) and (not ((-webkit-backdrop-filter: saturate(1)) and (-webkit-backdrop-filter: brightness(1))))) {
     #card {
         background-color: rgba(var(--color-base), .7);
     }
