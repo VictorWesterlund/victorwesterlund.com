@@ -1,0 +1,16 @@
+html,
+body {
+	height: 100%;
+	margin: 0;
+	background-color: blue;
+	display: grid;
+	align-content: center;
+	justify-content: center;
+	user-select: none;
+}
+
+img {
+	width: clamp(20px, 50vh, 80vw);
+	image-rendering: pixelated;
+	pointer-events: none;
+}
