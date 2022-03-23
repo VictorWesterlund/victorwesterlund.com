@@ -7,10 +7,32 @@ body {
 	align-content: center;
 	justify-content: center;
 	user-select: none;
+	overflow: hidden;
 }
 
 img {
 	width: clamp(20px, 50vh, 80vw);
 	image-rendering: pixelated;
 	pointer-events: none;
+}
+
+#pattern {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+#pattern p {
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+#pattern p span {
+	font-size: clamp(10px, 4vh, 10vw);
+	font-family: monospace;
+	font-weight: bold;
+	color: black;
 }
