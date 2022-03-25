@@ -11,28 +11,29 @@ body {
 }
 
 img {
+	position: relative;
+	z-index: 1;
 	width: clamp(20px, 50vh, 80vw);
 	image-rendering: pixelated;
 	pointer-events: none;
 }
 
-#pattern {
+section {
 	position: fixed;
 	inset: 0;
 	width: 100%;
 	height: 100%;
-	z-index: -1;
 }
 
-#pattern p {
+section p {
 	margin: 0;
 	display: flex;
 	justify-content: space-between;
 }
 
-#pattern p span {
+section p span {
 	font-size: clamp(10px, 4vh, 10vw);
 	font-family: monospace;
 	font-weight: bold;
-	color: black;
+	color: rgba(0, 0, 0, .15);
 }

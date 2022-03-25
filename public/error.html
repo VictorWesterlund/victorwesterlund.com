@@ -17,12 +17,13 @@
 </head>
 <body>
     <img src="assets/media/wrongplace.gif"/>
-    <div id="pattern"></div>
     <script type="module">
         import { default as WrongPlace } from "./assets/js/WrongPlace.mjs";
 
-        const main = document.getElementById("pattern");
-        window._wrongplace = new WrongPlace(main);
+        const pattern = document.createElement("section");
+        document.documentElement.appendChild(pattern);
+
+        window._wrongplace = new WrongPlace(pattern);
     </script>
 </body>
 </html>
