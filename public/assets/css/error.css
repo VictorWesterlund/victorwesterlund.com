@@ -1,0 +1,15 @@
+#card {
+    position: relative;
+    padding: var(--padding);
+    border-radius: clamp(18px, 1vw, 1vw);
+    backdrop-filter: saturate(100) brightness(.4);
+    -webkit-backdrop-filter: saturate(100) brightness(.4);
+    border: solid var(--border-size) rgba(var(--color-contrast), .1);
+    box-shadow:  0 1vh 2vh rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
+}
+
+@supports ((not ((backdrop-filter: saturate(1)) and (backdrop-filter: brightness(1)))) and (not ((-webkit-backdrop-filter: saturate(1)) and (-webkit-backdrop-filter: brightness(1))))) {
+    #card {
+        background-color: rgba(var(--color-base), .7);
+    }
+}
