@@ -1,205 +1,209 @@
-:root {
-    --color-base: 0, 0, 0;
-    --color-contrast: 256, 256, 256;
-
-    --padding: clamp(40px, 2vw, 2vw);
-    --border-size: clamp(4px, .25vw, .25vw);
-}
-
 /* -- Cornerstones -- */
+
+:root {
+    --primer-color-base: 255, 255, 255;
+    --primer-color-contrast: 0, 0, 0;
+
+    --color-base: rgb(var(--primer-color-base));
+    --color-contrast: rgb(var(--primer-color-contrast));
+
+    --padding: 20px;
+}
 
 * {
     margin: 0;
-    font-family: "Monaco", "Consolas", monospace, sans-serif;
-    color: rgb(var(--color-contrast));
+    box-sizing: border-box;
+    font-family: 'Courier', sans-serif;
+    font-size: 20px;
+    color: inherit;
 }
 
-*::selection {
-    background-color: rgb(var(--color-contrast));
-    color: rgb(var(--color-base));
+::selection {
+    background-color: var(--color-contrast);
+    color: var(--color-base);
 }
 
-html,
+::placeholder {
+    color: rgba(var(--primer-color-contrast), .5);
+}
+
 body {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-contrast);
+    background-color: var(--color-base);
+    gap: var(--padding);
+    margin: var(--padding) 0;
+    margin-bottom: 30vh;
 }
 
-html {
-    background-color: rgba(var(--color-base), .7);
-    background-size: cover;
-    background-blend-mode: overlay;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-picture {
-    display: contents;
-}
-
-h1 {
-    font-size: clamp(45px, 7vw, 6vh);
-}
-
-p, a {
-    font-size: clamp(20px, 3vw, 2vh);
-    text-align: justify;
+a:not(p > a) {
+    text-decoration: none;
 }
 
 /* -- Components -- */
 
-body {
+input {
+    letter-spacing: 5px;
+}
+
+input,
+.button {
+    background-color: var(--color-contrast);
+    color: var(--color-base);
+    padding: calc(var(--padding) / 2) calc(var(--padding) * 1.5);
+    text-align: left;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-items: center;
-    gap: var(--padding, 30px);
+    justify-content: center;
+    gap: var(--padding);
+    height: 3.5em;
 }
 
-body > div {
-    padding: calc(var(--padding) / 2);
+input,
+.button.phantom {
+    background-color: transparent;
+    border: solid 3px var(--color-contrast);
+    color: var(--color-contrast);
 }
 
-:is(#intro, #card) a {
-    --padding-vert: clamp(17px, 1.1vw, 1.1vw);
-
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
+img,
+.button {
     user-select: none;
-    background-color: rgba(var(--color-contrast), .13);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    box-shadow: 
-        inset 0 .3vh 1.6vh rgba(0, 0, 0, 0),
-        0 .1vh .3vh rgba(0, 0, 0, .12),
-        0 .1vh .2vh rgba(0, 0, 0, .24);
 }
 
-/* --- */
-
-#intro {
-    padding: calc(var(--padding) / 2);
+.button :not(p) {
+    height: 2em;
 }
 
-#intro a {
-    padding: var(--padding-vert) 2vw;
-    border-radius: 100px;
-    border: solid var(--border-size) rgba(var(--color-contrast), 0);
+.interact::before {
+    content: "tap";
+}
+
+/* ---- */
+
+.spacer {
+    display: grid;
+    justify-items: center;
+}
+
+body > .spacer {
     margin: var(--padding) 0;
-    width: calc(100% - ((var(--padding) / 2) + var(--border-size)));
 }
 
-#intro p {
-    margin: 1vh 0;
-    font-size: clamp(20px, 3vw, 3vh);
+.spacer div {
+    width: 205px;
+    height: 7px;
+    background-color: var(--color-contrast);
+    transform: rotate(-4deg);
 }
 
-/* --- */
+/* -- Content -- */
 
-#card,
-#card > div {
+section {
+    max-width: 600px;
+    margin: var(--padding) calc(var(--padding) * 1.5);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: calc(var(--padding) / 2);
+    text-align: justify;
+    gap: var(--padding);
 }
 
-#card {
-    --portrait-size: clamp(128px, 12vw, 12vh);
-
-    position: relative;
-    max-width: 600px;
-    padding: var(--padding);
-    border-radius: clamp(18px, 1vw, 1vw);
-    backdrop-filter: saturate(100) brightness(.4);
-    -webkit-backdrop-filter: saturate(100) brightness(.4);
-    border: solid var(--border-size) rgba(var(--color-contrast), .1);
-    box-shadow:  0 1vh 2vh rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
-}
-
-#card img {    
-    width: var(--portrait-size);
-    height: var(--portrait-size);
-    position: absolute;
-    border-radius: 100%;
-    top: calc(((var(--portrait-size) / 2) + var(--border-size)) * -1);
-    background-color: rgb(var(--color-base));
-    box-shadow: 0 1vh 2vh rgba(0, 0, 0 , .19), 0 6px 6px rgba(0, 0, 0 , .23);
-}
-
-#card a {
+section > *,
+section picture > img {
     width: 100%;
-    padding: var(--padding-vert) 0;
-    margin-top: calc(var(--padding) / 2);
-    border-radius: clamp(9px, .5vw, .5vw);
 }
 
-/* -- Media Queries -- */
+section#intro {
+    max-width: 250px;
+    text-align: center;
+}
 
-@supports ((not ((backdrop-filter: saturate(1)) and (backdrop-filter: brightness(1)))) and (not ((-webkit-backdrop-filter: saturate(1)) and (-webkit-backdrop-filter: brightness(1))))) {
-    #card {
-        background-color: rgba(var(--color-base), .7);
+section#contact > div {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    gap: var(--padding);
+}
+
+section#sky .button img {
+    height: 50%;
+}
+
+section#coffee > img {
+    width: 100px;
+    margin-bottom: calc(var(--padding) * 2);
+}
+
+/* ---- */
+
+.banner {
+    width: 100%;
+    background-color: rgba(var(--primer-color-contrast), .05);
+    text-align: center;
+    padding: calc(var(--padding) / 2) 0;
+    margin: var(--padding) 0;
+}
+
+/* -- Media queries -- */
+
+@media (hover: hover) {
+    .button:hover {
+        background-color: rgba(var(--primer-color-contrast), .75);
+    }
+
+    .button:active {
+        background-color: rgba(var(--primer-color-contrast), .7);
+    }
+
+    /* ---- */
+
+    .button.phantom:hover {
+        background-color: rgba(var(--primer-color-contrast), .05);
+    }
+
+    .button.phantom:active {
+        background-color: rgba(var(--primer-color-contrast), .1);
     }
 }
 
 @media (pointer: fine) {
-    :is(#intro, #card) a {
-        --transition-speed: 200ms;
-        transition: 
-            var(--transition-speed) background-color,
-            var(--transition-speed) box-shadow,
-            var(--transition-speed) border-color;
+    .button {
+        cursor: pointer;
     }
 
-    :is(#intro, #card) a:hover {
-        background-color: rgba(var(--color-contrast), .2);
-        border-color: rgba(var(--color-contrast), .2);
-        box-shadow: 
-            inset 0 .3vh 1.6vh rgba(0, 0, 0, .16),
-            0 .3vh .6vh rgba(0, 0, 0, .16),
-            0 .3vh .6vh rgba(0, 0, 0, .23);
-    }
-
-    :is(#intro, #card) a:active {
-        background-color: rgba(var(--color-contrast), .15);
+    .interact::before {
+        content: "click";
     }
 }
 
-@media (max-width: 330px) {
-    p, a {
-        text-align: left;
-        font-size: 18px;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primer-color-base: 0, 0, 0;
+        --primer-color-contrast: 255, 255, 255;
     }
 
-    #card {
-        padding: calc(var(--padding) / 2);
+    section#coffee > img {
+        filter: invert(1);
     }
 }
 
-@media (min-aspect-ratio: 14/9) and (min-height: 600px) {
-    body {
+@media (max-width: 303px) {
+    section#sky img {
+        display: none;
+    }
+}
+
+@media (min-width: 600px) {
+    section#code {
         display: grid;
+        grid-template-columns: 1fr 40px 1fr;
+        width: 100%;
+    }
+
+    section#contact > div {
+        grid-template-rows: 1fr;
         grid-template-columns: repeat(2, 1fr);
-        gap: unset;
-    }
-
-    body > div {
-        display: grid;
-        align-items: center;
-    }
-
-    body > div:last-of-type {
-        padding: calc(var(--padding) * 2);
-    }
-
-    #intro a {
-        width: unset;
-    }
-
-    #card {
-        min-width: 300px;
-        max-width: 30vw;
     }
 }
