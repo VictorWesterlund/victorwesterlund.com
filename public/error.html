@@ -10,19 +10,48 @@
     <meta property='og:image' content='//victorwesterlund.com/assets/media/banner.jpg'>
     <meta property='og:description' content='Full-stack web developer from Stockholm, Sweden.'>
     <meta property='og:url' content='https://victorwesterlund.com'>
-    <link rel="icon" href="/assets/media/favicon-dark.png" media="(prefers-color-scheme:no-preference)">
-    <link rel="icon" href="/assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
-    <link rel="icon" href="/assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:no-preference)">
+    <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
+    <link rel="icon" href="assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --primer-color-base: 0, 0, 0;
+            --primer-color-contrast: 255, 255, 255;
+        }
+
+        html {
+            height: -webkit-fill-available;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        body {
+            margin: 0;
+            height: 100%;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, .7);
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <div id="intro">
-            <h1>there is nothing here</h1>
-            <p>and that's all I know</p>
-            <a href="/">take me home -></a>
-        </div>
-    </div>
-    <script type="module" src="/assets/js/script.mjs"></script>
+    <section>
+       <h1>Oh, I’m in the wrong place, man!</h1>
+       <p>404 - Not Found</p>
+    </section>
+    <div class="spacer"><div></div></div>
+    <section>
+        <h1></h1>
+        <a href="/">
+            <div class="button phantom">
+                <p>Get me out of here!</p>
+            </div>
+        </a>
+    </section>
+    <script type="module">
+        import { default as Glitch } from "./assets/js/glitch/Glitch.mjs";
+
+        window.glitch = new Glitch(document.body.parentElement);
+    </script>
 </body>
 </html>

@@ -10,10 +10,19 @@
     --padding: 20px;
 }
 
+@font-face {
+    font-family: "Roboto Mono";
+    src:
+        local("Roboto Mono"),
+        url("../fonts/roboto-mono.woff2") format("woff2"),
+        url("../fonts/roboto-mono.ttf") format("ttf");
+    font-display: fallback;
+}
+
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Courier', sans-serif;
+    font-family: "Roboto Mono", "Courier", sans-serif;
     font-size: 20px;
     color: inherit;
 }
@@ -27,15 +36,20 @@
     color: rgba(var(--primer-color-contrast), .5);
 }
 
+html {
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: var(--color-contrast);
-    background-color: var(--color-base);
+    background-color: rgba(var(--primer-color-base), .95);
     gap: var(--padding);
-    margin: var(--padding) 0;
-    margin-bottom: 30vh;
+    padding: var(--padding) 0;
+    padding-bottom: 30vh;
 }
 
 a:not(p > a) {
@@ -58,13 +72,13 @@ input,
     align-items: center;
     justify-content: center;
     gap: var(--padding);
-    height: 3.5em;
+    height: 3em;
 }
 
 input,
 .button.phantom {
     background-color: transparent;
-    border: solid 3px var(--color-contrast);
+    border: solid 2px var(--color-contrast);
     color: var(--color-contrast);
 }
 
@@ -78,7 +92,7 @@ img,
 }
 
 .interact::before {
-    content: "tap";
+    content: "tap ";
 }
 
 /* ---- */
@@ -101,6 +115,7 @@ body > .spacer {
 
 /* -- Content -- */
 
+form,
 section {
     max-width: 600px;
     margin: var(--padding) calc(var(--padding) * 1.5);
@@ -114,6 +129,10 @@ section {
 section > *,
 section picture > img {
     width: 100%;
+}
+
+section#code {
+    text-align: center;
 }
 
 section#intro {
@@ -150,11 +169,17 @@ section#coffee > img {
 
 @media (hover: hover) {
     .button:hover {
-        background-color: rgba(var(--primer-color-contrast), .75);
+        color: var(--color-contrast);
+        background-color: transparent;
+        border: inset 2px black;
+    }
+
+    .button:hover:not(.phantom) :is(img, svg) {
+        filter: invert(1);
     }
 
     .button:active {
-        background-color: rgba(var(--primer-color-contrast), .7);
+        background-color: rgba(var(--primer-color-contrast), .1);
     }
 
     /* ---- */
@@ -174,7 +199,7 @@ section#coffee > img {
     }
 
     .interact::before {
-        content: "click";
+        content: "click ";
     }
 }
 
@@ -184,18 +209,23 @@ section#coffee > img {
         --primer-color-contrast: 255, 255, 255;
     }
 
-    section#coffee > img {
+    img:not(picture img) {
         filter: invert(1);
     }
 }
 
-@media (max-width: 303px) {
-    section#sky img {
+@media (max-width: 330px) {
+    section#sky .button img {
         display: none;
     }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 660px) {
+    input,
+    .button {
+        height: 3.5em;
+    }
+
     section#code {
         display: grid;
         grid-template-columns: 1fr 40px 1fr;
