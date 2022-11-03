@@ -6,44 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Full-stack web developer from Stockholm, Sweden.">
     <meta name="theme-color" content="#000000">
+
     <meta property='og:title' content='Victor Westerlund'>
-    <meta property='og:image' content='//victorwesterlund.com/assets/media/banner.jpg'>
+    <meta property='og:image' content='assets/media/banner.jpg'>
     <meta property='og:description' content='Full-stack web developer from Stockholm, Sweden.'>
     <meta property='og:url' content='https://victorwesterlund.com'>
+
+    <link data-id="logging" rel="dns-prefetch" href="https://logging-dnzfgzf6za-lz.a.run.app">
+    <link data-id="coffee" rel="preconnect" href="https://get-coffee-dnzfgzf6za-lz.a.run.app" crossorigin="anonymous">
+
     <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:no-preference)">
     <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
-    <link rel="icon" href="assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
+    <link rel="icon" href="assets/media/favicon-light.png" media="(prefers-color-scheme:dark)">
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div>
-        <div id="intro">
-            <p>hello, my name is</p>
-            <h1>victor</h1>
-            <p>I'm a</p>
-            <h1>full-stack</h1>
-            <h1>developer</h1>
-            <p>from Sweden</p>
-            <a href="https://github.com/VictorWesterlund">my github -></a>
+    <section id="intro">
+        <p><strong>victor westerlund</strong></p>
+        <div class="spacer">
+            <div></div>
         </div>
+        <p>I make things with code and coffee</p>
+    </section>
+    <section id="code">
+        <a href="https://github.com/VictorWesterlund" target="_blank" title="Github profile" rel="noreferrer noopener">
+            <div class="button">
+                <img src="assets/media/github.svg" alt="GitHub"/>
+                <p>on github</p>
+            </div>
+        </a>
+        <p>and</p>
+        <a href="work" title="Other projects">
+            <div class="button">
+                <p>elsewhere</p>
+            </div>
+        </a>
+    </section>
+    <section id="contact">
+        <p>Wanna chat? The best way to get in touch with me is by sending a mail. The time is currently <span id="time">00:00</span> in Sweden, and I will reply as soon as possible.</p>
+        <div>
+            <a href="#" title="Copy mail address">
+                <div class="button">
+                    <p>copy email address</p>
+                </div>
+            </a>
+            <a href="contact" title="Contact me">
+                <div class="button phantom dialog">
+                    <p>or use this form</p>
+                </div>
+            </a>
+        </div>
+    </section>
+    <div class="banner">
+        <p><strong>random stuff</strong></p>
     </div>
-    <div>
-        <div id="card">
-            <picture>
-                <source srcset="assets/media/pfp/256.webp" type="image/webp" media="(min-width: 600px)">
-                <source srcset="assets/media/pfp/128.webp" type="image/webp">
-                <source srcset="assets/media/pfp/256.jpg" type="image/jpg" media="(min-width: 600px)">
-                <img src="assets/media/pfp/128.jpg" alt="portrait of victor"/>
-            </picture>
-            <div>
-                <p>I create things with code. When I'm not creating things with code, I enjoy skiing, watching movies and some occasional gaming</p>
-                <p>And beyond computer science, I'm also an armchair rabbit-holer for engineering, physics and astronomy</p>
+    <section id="sky">
+        <picture>
+            <source srcset="https://friday.victorwesterlund.com/sky/original.webp" type="image/webp">
+            <img src="https://friday.victorwesterlund.com/sky/original.jpg" style="aspect-ratio: 16 / 9" alt="Webcam stillframe of the sky from my balcony"/>
+        </picture>
+        <p>Do you have an SSTV receiver? Tune in to a sneaky surprise and this beautiful view of the sky from my balcony as it looked like <strong><span id="sky_age">- minutes</span> ago</strong>. Or why not check out this pretty neat time-lapse.</p>
+        <a href="#" title="Sky timelapse">
+            <div class="button">
+                <p>view timelapse</p>
             </div>
-            <div>
-                <p>...and ☕, full-time</p>
-            </div>
-            <!--<a href="contact">contact me</a>-->
+        </a>
+        <div class="button phantom player" data-src="https://friday.victorwesterlund.com/sky/robot36.wav">
+            <img src="assets/media/wave.svg"/>
+            <p><strong>Robot36</strong><br><span class="interact"></span>to <span class="playstate">play</span></p>
         </div>
+        <p>⚠️ <i><strong>warning:</strong> loud f*cking noise.</i></p>
+    </section>
+    <div class="spacer">
+        <div></div>
+    </div>
+    <section id="coffee">
+        <img src="assets/media/coffee.svg" style="aspect-ratio: 1 / 1" alt="Hand-drawn coffee icon"/>
+        <p>Did I mention that I like coffee? Well in the past 7 days I have enjoyed a baffling <strong class="coffee">? cups of coffee</strong>, which is roughly equivalent to <strong class="coffee">? cups per day</strong>! <span class="coffee">?</span> impressive given that my weekly average per month is <span class="coffee">?</span> cups per day.</p>
+    </section>
+    <div class="spacer">
+        <div></div>
+    </div>
+    <section id="sneaky">
+        <p>Enter your top sneaky code here. You will know when you've struck the jackpot.</p>
+        <input placeholder="uuddlrlrabs"></input>
+        <p>So you don't have a sneaky code?<br><a href="#">Solve this puzzle</a> and I'll buy you a cup of coffee.</p>
+    </section>
+    <div class="spacer">
+        <div></div>
     </div>
     <script type="module" src="assets/js/script.mjs"></script>
 </body>
