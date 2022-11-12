@@ -22,37 +22,45 @@
     <link rel="icon" href="assets/media/favicon-dark.png" media="(prefers-color-scheme:light)">
     <link rel="icon" href="assets/media/favicon-light.png"  media="(prefers-color-scheme:dark)">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/pages/main.css">
 </head>
 <body>
-    <div>
-        <div id="intro">
-            <p>hello, my name is</p>
-            <h1>victor</h1>
-            <p>I'm a</p>
-            <h1>full-stack</h1>
-            <h1>developer</h1>
-            <p>from Sweden</p>
-            <a href="https://github.com/VictorWesterlund">my github -></a>
+    <header>
+        <div id="crumbs">
+            <p>victor westerlund</p>
         </div>
-    </div>
-    <div>
-        <div id="card">
-            <picture>
-                <source srcset="assets/media/pfp/256.webp" type="image/webp" media="(min-width: 600px)">
-                <source srcset="assets/media/pfp/128.webp" type="image/webp">
-                <source srcset="assets/media/pfp/256.jpg" type="image/jpg" media="(min-width: 600px)">
-                <img src="assets/media/pfp/128.jpg" alt="portrait of victor"/>
-            </picture>
-            <div>
-                <p>I create things with code. When I'm not creating things with code, I enjoy skiing, watching movies and some occasional gaming</p>
-                <p>And beyond computer science, I'm also an armchair rabbit-holer for engineering, physics and astronomy</p>
-            </div>
-            <div>
-                <p>...and ☕, full-time</p>
-            </div>
-            <!--<a href="contact">contact me</a>-->
+        <div id="logo">
+            <img src="assets/media/vw.svg"/>
         </div>
-    </div>
-    <script type="module" src="assets/js/script.mjs"></script>
+    </header>
+    <main class="menuOpen">
+        <div id="gaze"></div>
+        <div id="content">
+            <div id="menuContent">
+                <nav>
+                    <a>work</a>
+                    <a>about</a>
+                    <a>contact</a>
+                </nav>
+            </div>
+            <div id="menu">
+                <div class="inner">
+                    <div class="open">
+                        <svg viewBox="0 0 100 100"><polygon points="100,10 30,50 100,90"/></svg>
+                        <p>open menu</p>
+                    </div>
+                    <div class="close">
+                        <p>close menu</p>
+                        <svg viewBox="0 0 100 100"><polygon points="100,10 30,50 100,90"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div id="mail">
+                <p><span>---- BEGIN PRIMARY MAIL BLOCK ----</span><br>victor@victorwesterlund.com<br><span>---- END PRIMARY MAIL BLOCK ----</span></p>
+                <p>to copy</p>
+            </div>
+        </div>
+        <script type="module" src="assets/js/script.mjs"></script>
+    </main>
 </body>
 </html>
